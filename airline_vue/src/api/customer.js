@@ -1,13 +1,13 @@
 import request from '@/utils/request.js'
 
-export const customerRegisterService=(registerData)=>{
+export const customerRegisterService=(CustomerRegisterData)=>{
     const params=new URLSearchParams();
-    for(let key in registerData){
-        params.append(key,registerData[key]);
-       console.log(key,registerData[key]);
-       console.log(params);
+    for(let key in CustomerRegisterData){
+        params.append(key,CustomerRegisterData[key]);
+      console.log(key,CustomerRegisterData[key]);
+      
 
     }
-   
-   request.post('/customer/register',registerData);
+    console.log(params.values());
+   request.post('/customer/register',CustomerRegisterData);
 }

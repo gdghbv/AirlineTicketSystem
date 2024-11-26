@@ -22,7 +22,7 @@ public class CustomerController {
         //调用CustomerService的findCustomerByEmail方法来检测该用户是否已经注册
         Customer customer = customerService.findCustomerByEmail(email);
         if (customer == null) {
-            customerService.register(citizenID, password, email);
+            customerService.register(citizenID, email, password);
             return Result.success();
         } else {
             return Result.error("该邮箱已被注册");

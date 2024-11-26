@@ -15,6 +15,8 @@ const registerData = ref({
   citizenId: "",
   companyId: "",
 });
+
+
 // 注册函数
 import { customerRegisterService } from "@/api/customer";
 const register= async()=>{

@@ -14,6 +14,7 @@ private CustomerMapper customerMapper;
 
     @Override
     public Customer findCustomerByEmail(String email) {
+        //调用customerMapper.findCustomerByEmail()方法，将email赋值回去Mapper
         Customer customer= customerMapper.findCustomerByEmail(email);
         //这里的return是Controller用来检测用户是否已经注册用户用的
         return customer;
