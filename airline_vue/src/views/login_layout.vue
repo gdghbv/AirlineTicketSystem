@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from "vue";
+import {  ref } from "vue";
 //记录登录页面的数据
 const userData = ref({
   email: "",
@@ -7,24 +7,27 @@ const userData = ref({
   role: "",
 });
 //记录注册页面的数据
-const registerData = reactive({
+const registerData = ref({
   email: "",
   password: "",
   repassword: "",
   role: "1",
-  customerId: "",
+  citizenId: "",
   companyId: "",
 });
 // 注册函数
-// import { userRegisterService } from "@/api/user";
-// const register = async() => {
-//   let result =await userRegisterService(registerData.value);
-//   if(result.code===0){
-//     alert("注册成功！")
-//   }else{
-//     alert("注册失败！")
-//   }
-// };
+import { customerRegisterService } from "@/api/customer";
+const register= async()=>{
+  let result = await customerRegisterService(registerData.value);
+  console.log(result);
+  console.log(registerData.value);
+  console.log("111");
+if (result.code===0){
+  alert(result.msg?result.msg:"注册成功");
+}else {
+  alert("注册失败")
+}
+}
 
 const checkRePassword = (rule, value, callback) => {
   if (value == "") {
@@ -103,11 +106,11 @@ const registerAirport=ref(false)
               <el-radio label="3">机场用户</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item v-show="registerCustomer" prop="customerID">
+          <el-form-item v-show="registerCustomer" prop="citizenID">
             <el-input
               prefix-icon="Id"
               placeholder="请输入身份证号码"
-              v-model="registerData.customerId"
+              v-model="registerData.citizenId"
             />
           </el-form-item>
           <el-form-item v-show="registerCompany" prop="companyID">
