@@ -17,10 +17,14 @@ public class CompanyController {
    @PostMapping("register")
     public Result register(String companyID,String email,String password){
        Company company= companyService.findCompanyByEmail(email);
+       System.out.println("--------------------------------------------------------------------");
        if(company==null){
            companyService.register(companyID,email,password);
+           System.out.println("注册成功"+Result.success());
            return Result.success();
+
        }else {
+           System.out.println("--------------------------------------------------------------------");
            return Result.error("邮箱已经被注册");
        }
    }

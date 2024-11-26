@@ -12,8 +12,8 @@ const registerData = ref({
   password: "",
   repassword: "",
   role: "1",
-  citizenId: "",
-  companyId: "",
+  citizenID: "",
+  companyID: "",
 });
 
 
@@ -22,7 +22,6 @@ import { customerRegisterService } from "@/api/customer";
 const register= async()=>{
   let result = await customerRegisterService(registerData.value);
   console.log(result);
-  console.log(registerData.value);
   console.log("111");
 if (result.code===0){
   alert(result.msg?result.msg:"注册成功");
@@ -112,7 +111,7 @@ const registerAirport=ref(false)
             <el-input
               prefix-icon="Id"
               placeholder="请输入身份证号码"
-              v-model="registerData.citizenId"
+              v-model="registerData.citizenID"
             />
           </el-form-item>
           <el-form-item v-show="registerCompany" prop="companyID">
