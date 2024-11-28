@@ -1,16 +1,16 @@
 package com.example.airline_ticket_system_idea.service.Impl;
 
-import com.example.airline_ticket_system_idea.mapper.CustomerMapper;
-import com.example.airline_ticket_system_idea.pojo.Customer;
-import com.example.airline_ticket_system_idea.service.CustomerService;
-import com.example.airline_ticket_system_idea.util.Md5Util;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+        import com.example.airline_ticket_system_idea.mapper.CustomerMapper;
+        import com.example.airline_ticket_system_idea.pojo.Customer;
+        import com.example.airline_ticket_system_idea.service.CustomerService;
+        import com.example.airline_ticket_system_idea.util.Md5Util;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-@Autowired
-private CustomerMapper customerMapper;
+    @Autowired
+    private CustomerMapper customerMapper;
 
     @Override
     public Customer findCustomerByEmail(String email) {

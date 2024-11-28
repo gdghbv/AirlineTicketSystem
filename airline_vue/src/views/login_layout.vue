@@ -41,7 +41,8 @@ catch(e){console.log(e)}
 }
 
 import { customerLoginService,companyLoginService,airportLoginService } from "@/api/user";
-
+import { useRouter } from "vue-router";
+const router = useRouter();
 const login= async()   => {
   try{ let result;
     switch(userData.value.role){
@@ -53,9 +54,11 @@ const login= async()   => {
         break;
       case "3":
         result = await airportLoginService(userData.value);
-    }
+    }ElMessage.success(result.msg?result.msg:"登录成功");
+  router.push('/company')
+  }catch(e){    console.log(userData.value)}
     
-  ElMessage.success(result.msg?result.msg:"登录成功");}catch(e){    console.log(userData.value)}
+  
   }
 
  
