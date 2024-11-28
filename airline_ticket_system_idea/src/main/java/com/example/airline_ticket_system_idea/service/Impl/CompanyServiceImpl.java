@@ -20,6 +20,6 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public void register(String companyID, String email, String password) {
         String md5String = Md5Util.getMD5String(password);
-          companyMapper.add(companyID,email,md5String);
+          companyMapper.add(companyID,email,password);
     }
 }

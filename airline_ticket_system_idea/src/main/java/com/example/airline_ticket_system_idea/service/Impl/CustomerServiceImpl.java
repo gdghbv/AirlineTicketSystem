@@ -24,7 +24,7 @@ private CustomerMapper customerMapper;
     @Override
     public void register(String citizenID, String email, String password) {
         //加密
-        String md5String = Md5Util.getMD5String(password);
-        customerMapper.add(citizenID,email,md5String);
+//        String md5String = Md5Util.getMD5String(password);
+        customerMapper.add(citizenID,email,password);
     }
 }

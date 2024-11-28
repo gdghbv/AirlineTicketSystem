@@ -1,37 +1,70 @@
 <script setup>
 import {  ref } from "vue";
 //记录登录页面的数据
+
+//记录注册页面的数据
 const userData = ref({
   email: "",
   password: "",
-  role: "",
-});
-//记录注册页面的数据
-const registerData = ref({
-  email: "",
-  password: "",
   repassword: "",
-  role: "1",
+  role: "",
   citizenID: "",
   companyID: "",
+  airportID:""
 });
+
 
 
 // 注册函数
-import { customerRegisterService } from "@/api/customer";
+import { ElMessage } from 'element-plus';
+import { customerRegisterService ,companyRegisterService,airportRegisterService} from "@/api/user";
+ 
 const register= async()=>{
-  let result = await customerRegisterService(registerData.value);
-if (result.code===0){
-  alert(result.msg?result.msg:"注册成功");
-}else {
-  alert("注册失败")
+try{ let result;
+  switch(userData.value.role){
+    case "1":
+    result = await customerRegisterService(userData.value);
+   break;
+    case "2":
+       result = await companyRegisterService(userData.value);
+      break;
+      case "3":
+        result = await airportRegisterService(userData.value);}
+// if (result.code===0){
+//   alert(result.msg?result.msg:"注册成功");
+// }else {
+//   alert("注册失败")
+// }
+//将result的结果（code）处理都交给了request.js，错误的话会返回一个消息，成功则会执行继续往下执行
+ElMessage.success(result.msg?result.msg:"注册成功");}
+catch(e){console.log(e)}
 }
-}
+
+import { customerLoginService,companyLoginService,airportLoginService } from "@/api/user";
+
+const login= async()   => {
+  try{ let result;
+    switch(userData.value.role){
+      case "1":
+        result = await customerLoginService(userData.value);
+        break;
+      case "2":
+        result = await companyLoginService(userData.value);
+        break;
+      case "3":
+        result = await airportLoginService(userData.value);
+    }
+    
+  ElMessage.success(result.msg?result.msg:"登录成功");}catch(e){    console.log(userData.value)}
+  }
+
+ 
+
 
 const checkRePassword = (rule, value, callback) => {
   if (value == "") {
     callback(new Error("请再次输入密码"));
-  } else if (value !== registerData.value.password) {
+  } else if (value !== userData.value.password) {
     callback(new Error("两次密码不一样！"));
   } else {
     callback();
@@ -85,7 +118,7 @@ const registerAirport=ref(false)
         <el-form
           ref="form"
           v-if="!signUpMode"
-          :model="registerData"
+          :model="userData"
           :rules="registerRules"
         >
           <el-form-item>
@@ -95,11 +128,11 @@ const registerAirport=ref(false)
             <el-input
               prefix-icon="user"
               placeholder="请输入邮箱"
-              v-model="registerData.email"
+              v-model="userData.email"
             />
           </el-form-item>
           <el-form-item prop="role">
-            <el-radio-group v-model="registerData.role" @change="clickChange">
+            <el-radio-group v-model="userData.role" @change="clickChange">
               <el-radio label="1">客户</el-radio>
               <el-radio label="2">航空公司用户</el-radio>
               <el-radio label="3">机场用户</el-radio>
@@ -109,14 +142,14 @@ const registerAirport=ref(false)
             <el-input
               prefix-icon="Id"
               placeholder="请输入身份证号码"
-              v-model="registerData.citizenID"
+              v-model="userData.citizenID"
             />
           </el-form-item>
           <el-form-item v-show="registerCompany" prop="companyID">
             <el-input
               prefix-icon="Id"
               placeholder="请输入企业社会统一信用号"
-              v-model="registerData.companyId"
+              v-model="userData.companyID"
             />
           </el-form-item>
           
@@ -126,7 +159,7 @@ const registerAirport=ref(false)
               type="password"
               show-password
               placeholder="请输入密码"
-              v-model="registerData.password"
+              v-model="userData.password"
             />
           </el-form-item>
           <el-form-item prop="repassword">
@@ -135,8 +168,8 @@ const registerAirport=ref(false)
               type="password"
               show-password
               placeholder="请再次输入密码"
-              v-model="registerData.repassword"
-              prop="repassword"
+              v-model="userData.repassword"
+          
             />
           </el-form-item>
           <el-form-item>
@@ -145,7 +178,7 @@ const registerAirport=ref(false)
             </el-button>
           </el-form-item>
         </el-form>
-
+<!-- 登录表单 -->
         <el-form ref="form" :model="userData" v-if="signUpMode" >
           <el-form-item>
             <h1>登录</h1>
@@ -153,15 +186,15 @@ const registerAirport=ref(false)
           <el-form-item>
             <el-input
               prefix-icon="user"
-              placeholder="请输入用户名"
+              placeholder="请输入用户邮箱"
               v-model="userData.email"
             />
           </el-form-item>
           <el-form-item>
             <el-radio-group v-model="userData.role">
-              <el-radio    label="1">机场用户</el-radio>
+              <el-radio    label="1">客户</el-radio>
               <el-radio    label="2">航空公司用户</el-radio>
-              <el-radio    label="3">客户</el-radio>
+              <el-radio    label="3">机场用户</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item>
@@ -174,7 +207,7 @@ const registerAirport=ref(false)
             />
           </el-form-item>
           <el-form-item>
-            <el-button class="button" type="primary" auto-insert-space >
+            <el-button class="button" type="primary" auto-insert-space @click="login" >
               登录
             </el-button>
           </el-form-item>
