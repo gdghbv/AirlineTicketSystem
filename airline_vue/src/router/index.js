@@ -5,6 +5,7 @@ import company_layout from '../views/company_layout.vue';
 import company_aircraft from "@/components/company_aircraft.vue";
 import company_info from "@/components/company_info.vue";
 import company_submitAirline from "@/components/company_submitAirline.vue";
+import airport_layout from "@/views/airport_layout.vue";
 
 //定义路由关系
 const routes =[
@@ -16,6 +17,7 @@ const routes =[
         {path:'/company/aircraft',component:company_aircraft},
         {path:'/company/submitAirline',component:company_submitAirline},
     ]},
+    {path: '/airport', component: airport_layout},
 ]
 
 //创建路由器

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface CompanyMapper {
+
     @Select("SELECT * FROM company_info WHERE email = #{email}")
     Company findCompanyByEmail(String email);
 

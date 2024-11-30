@@ -1,5 +1,5 @@
 <script setup>
-import {  ref } from "vue";
+import { ref } from "vue";
 //记录登录页面的数据
 
 //记录注册页面的数据
@@ -10,58 +10,64 @@ const userData = ref({
   role: "",
   citizenID: "",
   companyID: "",
-  airportID:""
+  airportID: ""
 });
 
 
 
 // 注册函数
 import { ElMessage } from 'element-plus';
-import { customerRegisterService ,companyRegisterService,airportRegisterService} from "@/api/user";
- 
-const register= async()=>{
-try{ let result;
-  switch(userData.value.role){
-    case "1":
-    result = await customerRegisterService(userData.value);
-   break;
-    case "2":
-       result = await companyRegisterService(userData.value);
-      break;
+import { customerRegisterService, companyRegisterService, airportRegisterService } from "@/api/user";
+
+const register = async () => {
+  try {
+    let result;
+    switch (userData.value.role) {
+      case "1":
+        result = await customerRegisterService(userData.value);
+        break;
+      case "2":
+        result = await companyRegisterService(userData.value);
+        break;
       case "3":
-        result = await airportRegisterService(userData.value);}
-// if (result.code===0){
-//   alert(result.msg?result.msg:"注册成功");
-// }else {
-//   alert("注册失败")
-// }
-//将result的结果（code）处理都交给了request.js，错误的话会返回一个消息，成功则会执行继续往下执行
-ElMessage.success(result.msg?result.msg:"注册成功");}
-catch(e){console.log(e)}
+        result = await airportRegisterService(userData.value);
+    }
+    // if (result.code===0){
+    //   alert(result.msg?result.msg:"注册成功");
+    // }else {
+    //   alert("注册失败")
+    // }
+    //将result的结果（code）处理都交给了request.js，错误的话会返回一个消息，成功则会执行继续往下执行
+    ElMessage.success(result.msg ? result.msg : "注册成功");
+  }
+  catch (e) { console.log(e) }
 }
 
-import { customerLoginService,companyLoginService,airportLoginService } from "@/api/user";
+import { customerLoginService, companyLoginService, airportLoginService } from "@/api/user";
 import { useRouter } from "vue-router";
 const router = useRouter();
-const login= async()   => {
-  try{ let result;
-    switch(userData.value.role){
+const login = async () => {
+  try {
+    let result;
+    switch (userData.value.role) {
       case "1":
         result = await customerLoginService(userData.value);
         break;
       case "2":
         result = await companyLoginService(userData.value);
+        router.push('/company')
         break;
       case "3":
         result = await airportLoginService(userData.value);
-    }ElMessage.success(result.msg?result.msg:"登录成功");
-  router.push('/company')
-  }catch(e){    console.log(userData.value)}
-    
-  
-  }
+        router.push('/airport')
+    }ElMessage.success(result.msg ? result.msg : "登录成功");
 
- 
+  } catch (e) { console.log(userData.value) }
+
+
+}
+
+
 
 
 const checkRePassword = (rule, value, callback) => {
@@ -86,21 +92,21 @@ const registerRules = {
 
 
 //注册页面的点击切换事件
-const clickChange = async(val) => {
-  if (val==1||signUpMode.value==true) {
-   registerCustomer.value=true;
-   registerCompany.value=false;
-   registerAirport.value=false;
-   
-  } else if (val == 2||signUpMode.value==true) {
-    registerCustomer.value=false;
-    registerCompany.value=true;
-    registerAirport.value=false;
-  
-  } else if (val == 3||signUpMode.value==true){
-    registerCustomer.value=false;
-    registerCompany.value=false;
-    registerAirport.value=true;
+const clickChange = async (val) => {
+  if (val == 1 || signUpMode.value == true) {
+    registerCustomer.value = true;
+    registerCompany.value = false;
+    registerAirport.value = false;
+
+  } else if (val == 2 || signUpMode.value == true) {
+    registerCustomer.value = false;
+    registerCompany.value = true;
+    registerAirport.value = false;
+
+  } else if (val == 3 || signUpMode.value == true) {
+    registerCustomer.value = false;
+    registerCompany.value = false;
+    registerAirport.value = true;
   }
 };
 
@@ -108,9 +114,9 @@ const clickChange = async(val) => {
 const signUpMode = ref(true);
 
 //
-const registerCustomer=ref(true);
-const registerCompany=ref(false);
-const registerAirport=ref(false)
+const registerCustomer = ref(true);
+const registerCompany = ref(false);
+const registerAirport = ref(false)
 </script>
 <template>
   <div class="container" :class="{ 'sign-up-mode': signUpMode }">
@@ -118,21 +124,12 @@ const registerAirport=ref(false)
     <div class="form-container">
       <div class="signin-signup">
         <!--注册表单 -->
-        <el-form
-          ref="form"
-          v-if="!signUpMode"
-          :model="userData"
-          :rules="registerRules"
-        >
+        <el-form ref="form" v-if="!signUpMode" :model="userData" :rules="registerRules">
           <el-form-item>
             <h1>注册</h1>
           </el-form-item>
           <el-form-item prop="email">
-            <el-input
-              prefix-icon="user"
-              placeholder="请输入邮箱"
-              v-model="userData.email"
-            />
+            <el-input prefix-icon="user" placeholder="请输入邮箱" v-model="userData.email" />
           </el-form-item>
           <el-form-item prop="role">
             <el-radio-group v-model="userData.role" @change="clickChange">
@@ -142,38 +139,22 @@ const registerAirport=ref(false)
             </el-radio-group>
           </el-form-item>
           <el-form-item v-show="registerCustomer" prop="citizenID">
-            <el-input
-              prefix-icon="Id"
-              placeholder="请输入身份证号码"
-              v-model="userData.citizenID"
-            />
+            <el-input prefix-icon="Id" placeholder="请输入身份证号码" v-model="userData.citizenID" />
           </el-form-item>
           <el-form-item v-show="registerCompany" prop="companyID">
-            <el-input
-              prefix-icon="Id"
-              placeholder="请输入企业社会统一信用号"
-              v-model="userData.companyID"
-            />
+            <el-input prefix-icon="Id" placeholder="请输入企业社会统一信用号" v-model="userData.companyID" />
           </el-form-item>
-          
+          <el-form-item v-show="registerAirport" prop="airportID">
+            <el-input v-model="userData.airportID" placeholder="请输入机场ID" prefix-icon="Id"></el-input>
+          </el-form-item>
+
           <el-form-item prop="password">
-            <el-input
-              prefix-icon="password"
-              type="password"
-              show-password
-              placeholder="请输入密码"
-              v-model="userData.password"
-            />
+            <el-input prefix-icon="password" type="password" show-password placeholder="请输入密码"
+              v-model="userData.password" />
           </el-form-item>
           <el-form-item prop="repassword">
-            <el-input
-              prefix-icon="repeat-password"
-              type="password"
-              show-password
-              placeholder="请再次输入密码"
-              v-model="userData.repassword"
-          
-            />
+            <el-input prefix-icon="repeat-password" type="password" show-password placeholder="请再次输入密码"
+              v-model="userData.repassword" />
           </el-form-item>
           <el-form-item>
             <el-button class="button" type="primary" auto-insert-space @click="register">
@@ -181,36 +162,27 @@ const registerAirport=ref(false)
             </el-button>
           </el-form-item>
         </el-form>
-<!-- 登录表单 -->
-        <el-form ref="form" :model="userData" v-if="signUpMode" >
+        <!-- 登录表单 -->
+        <el-form ref="form" :model="userData" v-if="signUpMode">
           <el-form-item>
             <h1>登录</h1>
           </el-form-item>
           <el-form-item>
-            <el-input
-              prefix-icon="user"
-              placeholder="请输入用户邮箱"
-              v-model="userData.email"
-            />
+            <el-input prefix-icon="user" placeholder="请输入用户邮箱" v-model="userData.email" />
           </el-form-item>
           <el-form-item>
             <el-radio-group v-model="userData.role">
-              <el-radio    label="1">客户</el-radio>
-              <el-radio    label="2">航空公司用户</el-radio>
-              <el-radio    label="3">机场用户</el-radio>
+              <el-radio label="1">客户</el-radio>
+              <el-radio label="2">航空公司用户</el-radio>
+              <el-radio label="3">机场用户</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item>
-            <el-input
-              prefix-icon="password"
-              type="password"
-              show-password
-              placeholder="请输入密码"
-              v-model="userData.password"
-            />
+            <el-input prefix-icon="password" type="password" show-password placeholder="请输入密码"
+              v-model="userData.password" />
           </el-form-item>
           <el-form-item>
-            <el-button class="button" type="primary" auto-insert-space @click="login" >
+            <el-button class="button" type="primary" auto-insert-space @click="login">
               登录
             </el-button>
           </el-form-item>
