@@ -20,6 +20,6 @@ public class AirportServiceImpl implements AirportService {
     @Override
     public void register(String airportID, String email, String password) {
         String  md5Util=Md5Util.getMD5String(password);
-            airportMapper.add(airportID,email,password);
+            airportMapper.add(airportID,email,md5Util);
     }
 }
