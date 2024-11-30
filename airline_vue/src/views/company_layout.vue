@@ -1,4 +1,4 @@
-<template>
+np<template>
   <div class="common-layout">
     <el-container class="layout-container">
       <el-header>航空公司菜单</el-header>
