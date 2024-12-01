@@ -4,11 +4,9 @@ import com.example.airline_ticket_system_idea.pojo.Company;
 import com.example.airline_ticket_system_idea.pojo.Result;
 import com.example.airline_ticket_system_idea.service.CompanyService;
 import com.example.airline_ticket_system_idea.util.JwtUtil;
+import com.example.airline_ticket_system_idea.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +41,7 @@ public class CompanyController {
        if(checkPassword(password,company.getPassword())){
            //登录成功，生成令牌
            Map<String, Object> claims = new HashMap<>();
-           claims.put("id", company.getCompanyID()); //放入注册用户的id
+           claims.put("companyID", company.getCompanyID()); //放入注册用户的id
            claims.put("email",company.getEmail());//放入注册用户的username
            String token = JwtUtil.genToken(claims); //生成token
            return Result.success(token); //响应JWT token令牌字符串
@@ -51,4 +49,13 @@ public class CompanyController {
        }
        return Result.error("密码错误");
    }
+    @GetMapping("/companyInfo")
+    public Result<Company> companyInfo(@RequestHeader(name="Authorization") String token){
+//        Map<String, Object> map = JwtUtil.parseToken(token);
+//        String email = (String) map.get("email");
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String email = (String) map.get("email");
+        Company company = companyService.findCompanyByEmail(email);
+        return Result.success(company);
+    }
 }
