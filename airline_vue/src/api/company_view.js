@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 export const aircraftListService =()=>{
-    return request.get('/companyView/list')
+    return request.get('/companyView/aircraftList')
 }
 export const aircraftAddService = (data)=>{
     return request.post('/companyView/aircraft_add',data)

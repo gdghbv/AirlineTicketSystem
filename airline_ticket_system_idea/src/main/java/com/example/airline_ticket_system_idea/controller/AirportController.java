@@ -42,7 +42,7 @@ public class AirportController {
         if(checkPassword(password,airport.getPassword())){
             //登录成功，生成令牌
             Map<String, Object> claims = new HashMap<>();
-            claims.put("id", airport.getAirportID()); //放入注册用户的id
+            claims.put("airportIDd", airport.getAirportID()); //放入注册用户的id
             claims.put("email", airport.getEmail());//放入注册用户的username
             String token = JwtUtil.genToken(claims); //生成token
             return Result.success(token); //响应JWT token令牌字符串
