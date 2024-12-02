@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import login from '../views/login_layout.vue'
 import company_layout from '../views/company_layout.vue';
 import company_aircraft from "@/components/company_aircraft.vue";
-import company_info from "@/components/company_info.vue";
+import company_info from "@ /components/company_info.vue";
 import company_submitAirline from "@/components/company_submitAirline.vue";
 import airport_layout from "@/views/airport_layout.vue";
 

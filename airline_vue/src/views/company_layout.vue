@@ -1,8 +1,11 @@
-np<template>
+<template>
   <div class="common-layout">
     <el-container class="layout-container">
       <el-header>航空公司菜单</el-header>
-      <el-container>
+      <el-container><el-main>
+        <router-view></router-view>
+          
+        </el-main>
         <el-aside width="200px">
           <div class="el-aside__logo"></div>
           <!-- element-plus的菜单标签 -->
@@ -27,10 +30,7 @@ np<template>
             </el-menu-item>
           </el-menu>
         </el-aside>
-        <el-main>
-        <router-view></router-view>
-          
-        </el-main>
+        
       </el-container>
     </el-container>
   </div>

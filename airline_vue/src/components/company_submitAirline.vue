@@ -64,13 +64,13 @@ const showDialog = (row) => {
             <el-table-column label="序号" type="index"></el-table-column>
             <el-table-column label="航线ID" prop="routeID"></el-table-column>
             <el-table-column label="机型" prop="aircraftType"></el-table-column>
-            <el-table-column label="始发地" prop="origin"></el-table-column>
+            <el-table-column label="出发地" prop="origin"></el-table-column>
             <el-table-column label="目的地" prop="destination"></el-table-column>
-            <el-table-column label="起飞机场" prop="originAirport"></el-table-column>
-            <el-table-column label="到达机场" prop="destinationAirport"></el-table-column>
-            <el-table-column label="一等座" prop="firstSeats"></el-table-column>
-            <el-table-column label="商务座" prop="businessSeats"></el-table-column>
-            <el-table-column label="经济舱" prop="economySeats"></el-table-column>
+            <el-table-column label="出发机场" prop="originAirport"></el-table-column>
+            <el-table-column label="目标机场" prop="destinationAirport"></el-table-column>
+            <el-table-column label="一等座数量" prop="firstSeats"></el-table-column>
+            <el-table-column label="商务座数量" prop="businessSeats"></el-table-column>
+            <el-table-column label="经济舱数量" prop="economySeats"></el-table-column>
             <el-table-column label="公司ID" prop="companyID"></el-table-column>
             <el-table-column label="操作">
                 <template #default="{ row }">
