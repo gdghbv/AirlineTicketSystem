@@ -45,6 +45,8 @@ const register = async () => {
 
 import { customerLoginService, companyLoginService, airportLoginService } from "@/api/user";
 import { useRouter } from "vue-router";
+import { useTokenStore } from "@/stores/token";
+const tokenStore = useTokenStore();
 const router = useRouter();
 const login = async () => {
   try {
@@ -61,7 +63,7 @@ const login = async () => {
         result = await airportLoginService(userData.value);
         router.push('/airport')
     }ElMessage.success(result.msg ? result.msg : "登录成功");
-
+     tokenStore.setToken(result.data);
   } catch (e) { console.log(userData.value) }
 
 
@@ -163,7 +165,7 @@ const registerAirport = ref(false)
           </el-form-item>
         </el-form>
         <!-- 登录表单 -->
-        <el-form ref="form" :model="userData" v-if="signUpMode">
+        <el-form ref="form" :model="userData" v-if="signUpMode" :rules="registerRules">
           <el-form-item>
             <h1>登录</h1>
           </el-form-item>

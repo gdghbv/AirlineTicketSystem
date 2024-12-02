@@ -22,4 +22,9 @@ public class CompanyServiceImpl implements CompanyService {
         String md5String = Md5Util.getMD5String(password);
           companyMapper.add(companyID,email,md5String);
     }
+
+    @Override
+    public void update(Company company) {
+        companyMapper.update(company);
+    }
 }

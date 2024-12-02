@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CompanyViewService {
     List<CompanyAircraft> list();
+
+    void addAircraft(CompanyAircraft companyAircraft);
 }

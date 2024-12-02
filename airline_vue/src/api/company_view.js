@@ -1,7 +1,9 @@
 import request from '@/utils/request'
+import { useTokenStore } from '@/stores/token'
 
 export const aircraftListService =()=>{
-    return request.get('/companyView/aircraftList')
+    const tokenStore = useTokenStore()
+    return request.get('/companyView/aircraftList',{headers: {'Authorization': tokenStore.token}})
 }
 export const aircraftAddService = (data)=>{
     return request.post('/companyView/aircraft_add',data)
@@ -23,3 +25,4 @@ export const routesDeleteService = (id)=>{
 export const routesUpdateService = (data)=>{
     return request.put('/companyView/routes_update',data)
 }
+

@@ -23,5 +23,10 @@ public class CompanyViewController {
      List<CompanyAircraft> caList= companyViewService.list();
      return Result.success(caList);
  }
-
+@PostMapping("/addAircraft")
+    public Result<CompanyAircraft> addAircraft(@RequestBody CompanyAircraft companyAircraft){
+     companyViewService.addAircraft(companyAircraft);
+     return Result.success(companyAircraft);
+ }
 }
+
