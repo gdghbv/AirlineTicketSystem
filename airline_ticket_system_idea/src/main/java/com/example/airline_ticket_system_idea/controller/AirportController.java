@@ -16,7 +16,6 @@ import java.util.Map;
 
 import static com.example.airline_ticket_system_idea.util.Md5Util.checkPassword;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/airport")
 public class AirportController {
