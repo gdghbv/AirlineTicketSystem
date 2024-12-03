@@ -25,8 +25,24 @@ public class CompanyViewController {
  }
 @PostMapping("/addAircraft")
     public Result<CompanyAircraft> addAircraft(@RequestBody CompanyAircraft companyAircraft){
+     String aircraftId=companyAircraft.getAircraftID();
+     if(companyViewService.findAircraftByID(aircraftId)!=null){
+         return Result.error("该飞机编号已经存在");}
      companyViewService.addAircraft(companyAircraft);
      return Result.success(companyAircraft);
  }
-}
+ @PutMapping("/updateAircraft")
+    public Result<CompanyAircraft> updateAircraft(@RequestBody CompanyAircraft companyAircraft){
+     companyViewService.updateAircraft(companyAircraft);
+     return Result.success(companyAircraft);
+ }
+ @DeleteMapping("/deleteAircraft/{aircraftId}")
+    public Result<String> deleteAircraft(@PathVariable("aircraftId") String aircraftId){
+     companyViewService.deleteAircraft(aircraftId);
+     return Result.success("删除成功");
+ }
+ @GetMapping("/routesList")
+    public Result<List<>>> routesList(){
+ }
+
 

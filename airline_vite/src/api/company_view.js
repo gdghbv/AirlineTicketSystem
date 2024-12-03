@@ -8,23 +8,23 @@ export const aircraftListService =()=>{
     return request.get('/companyView/aircraftList')
 }
 export const aircraftAddService = (data)=>{
-    return request.post('/companyView/aircraft_add',data)
+    return request.post('/companyView/addAircraft',data)
 }
 export const aircraftDeleteService = (id)=>{
-    return request.delete('/companyView/aircraft_delete/'+id)
+    return request.delete('/companyView/deleteAircraft/'+id)
 }
 export const aircraftUpdateService = (data)=>{
-    return request.put('/companyView/aircraft_update',data)
+    return request.put('/companyView/updateAircraft',data)
 }
 export const routesListService =()=>{
-    return request.get('/companyView/routes_add')}
+    return request.get('/companyView/routes')}
 export const routesAddService = (data)=>{
-    return request.post('/companyView/routes_add',data)
+    return request.post('/companyView/addRoutes',data)
 }
 export const routesDeleteService = (id)=>{
-    return request.delete('/companyView/routes_delete/'+id)
+    return request.delete('/companyView/deleteRoutes/'+id)
 }
 export const routesUpdateService = (data)=>{
-    return request.put('/companyView/routes_update',data)
+    return request.put('/companyView/updateRoutes',data)
 }
 

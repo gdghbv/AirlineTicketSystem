@@ -4,10 +4,7 @@ import { ref } from 'vue';
 
 const dialogVisible = ref(false)
 const aircraft = ref([{
-    "aircraftType": "波音747",
-    "aircraftID": "B747-200",
-    "seatCount": 20,
-    "companyID": "C1001"
+
 }
 ])
 const title = ref('')
@@ -33,47 +30,47 @@ const aircraftList = async () => {
    
 }
 aircraftList();
-// import { ElMessage } from 'element-plus'
-// const addAircraft = async () => {
-//     let result = aircraftAddService(addAircraftData.value);
-//     ElMessage.success(result.msg ? result.msg : '添加成功');
-//     dialogVisible.value = false;
-//     aircraftList();
-// }
-// const updateAircraft = async () => {
-//     let result = aircraftUpdateService(addAircraftData.value);
-//     ElMessage.success(result.msg ? result.msg : '修改成功');
-//     dialogVisible.value = false;
-//     aircraftList();
-// }
-// import { ElMessageBox } from 'element-plus'
-// const aircraftDelete = async (row) => {
-//     ElMessageBox.confirm(
-//         '你确认要删除该分类信息吗?',
-//         '温馨提示',
-//         {
-//             confirmButtonText: '确认',
-//             cancelButtonText: '取消',
-//             type: 'warning',
-//         }
-//     )
-//         .then(async () => {
-//             //调用接口
-//             let result = await aircraftDeleteService(row.aircraftID);
-//             ElMessage({
-//                 type: 'success',
-//                 message: result + '删除成功',
-//             })
-//             //刷新列表
-//             aircraftList();
-//         })
-//         .catch(() => {
-//             ElMessage({
-//                 type: 'info',
-//                 message: '用户取消了删除',
-//             })
-//         })
-// }
+import { ElMessage } from 'element-plus'
+const addAircraft = async () => {
+    let result = await aircraftAddService(addAircraftData.value);
+    ElMessage.success(result.msg ? result.msg : '添加成功');
+    dialogVisible.value = false;
+    aircraftList();
+}
+const updateAircraft = async () => {
+    let result = await aircraftUpdateService(addAircraftData.value);
+    ElMessage.success(result.msg ? result.msg : '修改成功');
+    dialogVisible.value = false;
+    aircraftList();
+}
+import { ElMessageBox } from 'element-plus'
+const aircraftDelete = async (row) => {
+    ElMessageBox.confirm(
+        '你确认要删除该分类信息吗?',
+        '温馨提示',
+        {
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            type: 'warning',
+        }
+    )
+        .then(async () => {
+            //调用接口
+            let result = await aircraftDeleteService(row.aircraftID);
+            ElMessage({
+                type: 'success',
+                message:  '删除成功',
+            })
+            //刷新列表
+            aircraftList();
+        })
+        .catch(() => {
+            ElMessage({
+                type: 'info',
+                message: '用户取消了删除',
+            })
+        })
+}
 const showDialog = (row) => {
     dialogVisible.value = true;
     title.value = '编辑飞机信息';

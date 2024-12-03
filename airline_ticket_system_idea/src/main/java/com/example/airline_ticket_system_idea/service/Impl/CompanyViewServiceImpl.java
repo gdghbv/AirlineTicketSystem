@@ -29,4 +29,21 @@ public class CompanyViewServiceImpl implements CompanyViewService {
         companyViewMapper.addAircraft(companyAircraft);
     }
 
+    @Override
+    public CompanyAircraft findAircraftByID(String aircraftID) {
+         CompanyAircraft companyAircraft = companyViewMapper.findAircraftByID(aircraftID);
+        return companyAircraft;
+    }
+
+    @Override
+    public void updateAircraft(CompanyAircraft companyAircraft) {
+        companyViewMapper.updateAircraft(companyAircraft);
+    }
+
+    @Override
+    public void deleteAircraft(String aircraftId) {
+        companyViewMapper.deleteAircraft(aircraftId);
+    }
+
+
 }
