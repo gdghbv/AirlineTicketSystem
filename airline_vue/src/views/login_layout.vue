@@ -18,7 +18,6 @@ const userData = ref({
 // 注册函数
 import { ElMessage } from 'element-plus';
 import { customerRegisterService, companyRegisterService, airportRegisterService } from "@/api/user";
-
 const register = async () => {
   try {
     let result;
