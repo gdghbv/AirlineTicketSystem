@@ -3,43 +3,30 @@ import { ref ,} from 'vue';
 const title = ref('');
 const dialogVisible = ref(false);
 const routesData = ref([{
-    "routeID": "1",
-    "aircraftType": "波音747",
-    "origin": "北京",
-    "destination": "上海",
-    "originAirport": "北京首都国际机场",
-    "destinationAirport": "上海虹桥国际机场",
-    "firstSeats": "100",
-    "businessSeats": "50",
-    "economySeats": "20",
-    "companyID": "1"
+  
 }
 ]);
 const addRoutesData = ref([
     {
         routeID: '',
-        aircraftType: '',
+        aircraftID: '',
         origin: '',
         destination: '',
         originAirport: '',
         destinationAirport: '',
-        firstSeats: '',
-        businessSeats: '',
-        economySeats: '',
+      
         companyID: ''
     }
 ])
 const clearData = () => {
     addRoutesData.value = {
         routeID: '',
-        aircraftType: '',
+        aircraftID: '',
         origin: '',
         destination: '',
         originAirport: '',
         destinationAirport: '',
-        firstSeats: '',
-        businessSeats: '',
-        economySeats: '',
+       
         companyID: ''
     }
 }
@@ -48,7 +35,54 @@ const showDialog = (row) => {
     title.value='编辑航线';
     addRoutesData.value=row;
 }
-
+import {  routesListService,routesAddService,  routesDeleteService, routesUpdateService } from '@/api/company_view'
+const routesList = async () => {
+    let result = await routesListService();
+    routesData.value = result.data;
+   
+}
+routesList();
+import { ElMessage } from 'element-plus'
+const addRoutes = async () => {
+    let result = await routesAddService(addRoutesData.value);
+    ElMessage.success(result.msg ? result.msg : '添加成功');
+    dialogVisible.value = false;
+   routesList();
+}
+const updateRoutes = async () => {
+    let result = await routesUpdateService(addRoutesData.value);
+    ElMessage.success(result.msg ? result.msg : '修改成功');
+    dialogVisible.value = false;
+   routesList();
+}
+import { ElMessageBox } from 'element-plus'
+const routeDelete = async (row) => {
+    ElMessageBox.confirm(
+        '你确认要删除该航线信息吗?',
+        '温馨提示',
+        {
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            type: 'warning',
+        }
+    )
+        .then(async () => {
+            //调用接口
+            let result = await routesDeleteService(row.routeID);
+            ElMessage({
+                type: 'success',
+                message:  '删除成功',
+            })
+            //刷新列表
+           routesList();
+        })
+        .catch(() => {
+            ElMessage({
+                type: 'info',
+                message: '用户取消了删除',
+            })
+        })
+}
 </script>
 
 <template>
@@ -63,19 +97,17 @@ const showDialog = (row) => {
         <el-table :data="routesData" style="width: 100%">
             <el-table-column label="序号" type="index"></el-table-column>
             <el-table-column label="航线ID" prop="routeID"></el-table-column>
-            <el-table-column label="机型" prop="aircraftType"></el-table-column>
+            <el-table-column label="机型" prop="aircraftID"></el-table-column>
             <el-table-column label="始发地" prop="origin"></el-table-column>
             <el-table-column label="目的地" prop="destination"></el-table-column>
             <el-table-column label="起飞机场" prop="originAirport"></el-table-column>
             <el-table-column label="到达机场" prop="destinationAirport"></el-table-column>
-            <el-table-column label="一等座" prop="firstSeats"></el-table-column>
-            <el-table-column label="商务座" prop="businessSeats"></el-table-column>
-            <el-table-column label="经济舱" prop="economySeats"></el-table-column>
+         
             <el-table-column label="公司ID" prop="companyID"></el-table-column>
             <el-table-column label="操作">
                 <template #default="{ row }">
                 <el-button :icon="Edit" circle plain type="primary" @click="showDialog(row)">编辑</el-button>
-                <el-button :icon="Delete" circle plain type="danger" @click="routesDeleteService(row)">删除</el-button>
+                <el-button :icon="Delete" circle plain type="danger" @click="routeDelete(row)">删除</el-button>
            </template> 
         </el-table-column>
         </el-table>
@@ -84,8 +116,8 @@ const showDialog = (row) => {
                  <el-form-item label="航线ID" prop="routeID">
                     <el-input v-model="addRoutesData.routeID" placeholder="请输入航线ID"></el-input>
                  </el-form-item>
-                 <el-form-item label="机型" prop="aircraftType">
-                    <el-input v-model="addRoutesData.aircraftType" placeholder="请输入机型"></el-input>
+                 <el-form-item label="机型" prop="aircraftID">
+                    <el-input v-model="addRoutesData.aircraftID" placeholder="请输入机型"></el-input>
                  </el-form-item>
                  <el-form-item label="始发地" prop="origin">
                     <el-input v-model="addRoutesData.origin" placeholder="请输入始发地"></el-input>
@@ -99,15 +131,9 @@ const showDialog = (row) => {
                  <el-form-item label="到达机场" prop="destinationAirport">
                     <el-input v-model="addRoutesData.destinationAirport" placeholder="请输入到达机场"></el-input>
                  </el-form-item>
-                 <el-form-item label="一等座" prop="firstSeats">
-                    <el-input v-model="addRoutesData.firstSeats" placeholder="请输入一等座"></el-input>
-                 </el-form-item>
-                 <el-form-item label="商务座" prop="businessSeats">
-                    <el-input v-model="addRoutesData.businessSeats" placeholder="请输入商务座"></el-input>
-                 </el-form-item>
-                 <el-form-item label="经济舱" prop="economySeats">
-                    <el-input v-model="addRoutesData.economySeats" placeholder="请输入经济舱"></el-input>
-                 </el-form-item>
+              
+               
+                
                  <el-form-item label="公司ID" prop="companyID">
                     <el-input v-model="addRoutesData.companyID" placeholder="请输入公司ID"></el-input>
                  </el-form-item>

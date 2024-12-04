@@ -17,7 +17,7 @@ export const aircraftUpdateService = (data)=>{
     return request.put('/companyView/updateAircraft',data)
 }
 export const routesListService =()=>{
-    return request.get('/companyView/routes')}
+    return request.get('/companyView/routesList')}
 export const routesAddService = (data)=>{
     return request.post('/companyView/addRoutes',data)
 }

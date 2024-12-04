@@ -10,7 +10,5 @@ public class CompanyRoutes {
     private String destination;
     private String originAirport;
     private String destinationAirport;
-    private int businessSeats;
-    private int economySeats;
     private String companyID;
 }

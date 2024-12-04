@@ -2,6 +2,7 @@ package com.example.airline_ticket_system_idea.service.Impl;
 
 import com.example.airline_ticket_system_idea.mapper.CompanyViewMapper;
 import com.example.airline_ticket_system_idea.pojo.CompanyAircraft;
+import com.example.airline_ticket_system_idea.pojo.CompanyRoutes;
 import com.example.airline_ticket_system_idea.service.CompanyViewService;
 import com.example.airline_ticket_system_idea.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class CompanyViewServiceImpl implements CompanyViewService {
 
     @Override
     public CompanyAircraft findAircraftByID(String aircraftID) {
-         CompanyAircraft companyAircraft = companyViewMapper.findAircraftByID(aircraftID);
-        return companyAircraft;
+
+        return companyViewMapper.findAircraftByID(aircraftID);
     }
 
     @Override
@@ -45,5 +46,34 @@ public class CompanyViewServiceImpl implements CompanyViewService {
         companyViewMapper.deleteAircraft(aircraftId);
     }
 
+    @Override
+    public List<CompanyRoutes> routesList() {
+       Map<String,Object> map=ThreadLocalUtil.get();
+       String companyID=(String)map.get("companyID");
+       return companyViewMapper.routesList(companyID);
+    }
+
+    @Override
+    public CompanyRoutes findRoutesByID(String routeID) {
+        return companyViewMapper.findRoutesByID(routeID);
+    }
+
+    @Override
+    public void addRoutes(CompanyRoutes companyRoutes) {
+companyViewMapper.addRoutes(companyRoutes);
+    }
+
+    @Override
+    public void updateRoutes(CompanyRoutes companyRoutes) {
+        companyViewMapper.updateRoutes(companyRoutes);
+    }
+
+    @Override
+    public void deleteRoutes(String routeID) {
+companyViewMapper.deleteRoutes(routeID);
+    }
 
 }
+
+
+

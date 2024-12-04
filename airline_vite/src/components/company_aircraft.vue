@@ -25,7 +25,7 @@ const clearData = () => {
 import { aircraftListService, aircraftAddService, aircraftDeleteService, aircraftUpdateService } from '@/api/company_view'
 const aircraftList = async () => {
     let result = await aircraftListService();
-
+console.log(result);
     aircraft.value = result.data;
    
 }
@@ -46,7 +46,7 @@ const updateAircraft = async () => {
 import { ElMessageBox } from 'element-plus'
 const aircraftDelete = async (row) => {
     ElMessageBox.confirm(
-        '你确认要删除该分类信息吗?',
+        '你确认要删除该飞机信息吗?',
         '温馨提示',
         {
             confirmButtonText: '确认',
