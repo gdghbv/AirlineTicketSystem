@@ -1,5 +1,6 @@
 package com.example.airline_ticket_system_idea.controller;
 
+import com.example.airline_ticket_system_idea.pojo.AirportFlights;
 import com.example.airline_ticket_system_idea.pojo.CompanyRoutes;
 import com.example.airline_ticket_system_idea.pojo.Result;
 import com.example.airline_ticket_system_idea.service.AirportViewService;
@@ -22,5 +23,8 @@ public class AirportViewController {
     List<CompanyRoutes> list=airportViewService.airportRoutesList();
     return Result.success(list);
     }
-    
+    @GetMapping("/airportFlights")
+    public Result<List<AirportFlights>> flights(){
+
+    }
 }

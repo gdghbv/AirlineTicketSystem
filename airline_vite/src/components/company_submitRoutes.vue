@@ -9,7 +9,7 @@ const routesData = ref([{
 const addRoutesData = ref([
     {
         routeID: '',
-        aircraftID: '',
+      
         origin: '',
         destination: '',
         originAirport: '',
@@ -21,7 +21,7 @@ const addRoutesData = ref([
 const clearData = () => {
     addRoutesData.value = {
         routeID: '',
-        aircraftID: '',
+        
         origin: '',
         destination: '',
         originAirport: '',
@@ -97,7 +97,7 @@ const routeDelete = async (row) => {
         <el-table :data="routesData" style="width: 100%">
             <el-table-column label="序号" type="index"></el-table-column>
             <el-table-column label="航线ID" prop="routeID"></el-table-column>
-            <el-table-column label="机型" prop="aircraftID"></el-table-column>
+            
             <el-table-column label="始发地" prop="origin"></el-table-column>
             <el-table-column label="目的地" prop="destination"></el-table-column>
             <el-table-column label="起飞机场" prop="originAirport"></el-table-column>
@@ -116,9 +116,7 @@ const routeDelete = async (row) => {
                  <el-form-item label="航线ID" prop="routeID">
                     <el-input v-model="addRoutesData.routeID" placeholder="请输入航线ID"></el-input>
                  </el-form-item>
-                 <el-form-item label="机型" prop="aircraftID">
-                    <el-input v-model="addRoutesData.aircraftID" placeholder="请输入机型"></el-input>
-                 </el-form-item>
+                
                  <el-form-item label="始发地" prop="origin">
                     <el-input v-model="addRoutesData.origin" placeholder="请输入始发地"></el-input>
                  </el-form-item>
