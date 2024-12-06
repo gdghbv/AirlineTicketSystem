@@ -2,12 +2,13 @@
 
 import { ref } from 'vue';
 
+
 const dialogVisible = ref(false)
 const aircraft = ref([{
-    "aircraftType": "波音747",
-    "aircraftID": "B747-200",
-    "seatCount": 20,
-    "companyID": "C1001"
+    // "aircraftType": "波音747",
+    // "aircraftID": "B747-200",
+    // "seatCount": 20,
+    // "companyID": "C1001"1
 }
 ])
 const title = ref('')

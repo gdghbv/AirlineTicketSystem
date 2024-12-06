@@ -7,19 +7,13 @@
             <div class="el-aside__logo"></div>
             <!-- element-plus的菜单标签 -->
             <el-menu active-text-color="#ffd04b" background-color="#232323" text-color="#fff" router>
-              <el-menu-item index="/company/submitAirline">
+              <el-menu-item index="/airport/flight">
                 <el-icon>
                   <Management />
                 </el-icon>
-                <span>航线提交</span>
+                <span>航班管理</span>
               </el-menu-item>
-              <el-menu-item index="/company/aircraft">
-                <el-icon>
-                  <Promotion />
-                </el-icon>
-                <span>飞机管理</span>
-              </el-menu-item>
-              <el-menu-item index="/company/info">
+              <el-menu-item index="/airport/info">
                 <el-icon>
                   <User />
                 </el-icon>

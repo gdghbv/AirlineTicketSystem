@@ -3,16 +3,16 @@ import { ref ,} from 'vue';
 const title = ref('');
 const dialogVisible = ref(false);
 const routesData = ref([{
-    "routeID": "1",
-    "aircraftType": "波音747",
-    "origin": "北京",
-    "destination": "上海",
-    "originAirport": "北京首都国际机场",
-    "destinationAirport": "上海虹桥国际机场",
-    "firstSeats": "100",
-    "businessSeats": "50",
-    "economySeats": "20",
-    "companyID": "1"
+    // "routeID": "1",
+    // "aircraftType": "波音747",
+    // "origin": "北京",
+    // "destination": "上海",
+    // "originAirport": "北京首都国际机场",
+    // "destinationAirport": "上海虹桥国际机场",
+    // "firstSeats": "100",
+    // "businessSeats": "50",
+    // "economySeats": "20",
+    // "companyID": "1"
 }
 ]);
 const addRoutesData = ref([
