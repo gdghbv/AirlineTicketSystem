@@ -17,7 +17,7 @@
                 <el-icon>
                   <User />
                 </el-icon>
-                <span>公司信息</span>
+                <span>机场信息</span>
               </el-menu-item>
 
               <el-menu-item index="/airport/customer">
