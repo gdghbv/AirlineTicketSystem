@@ -2,6 +2,7 @@ package com.example.airline_ticket_system_idea.controller;
 
 import com.example.airline_ticket_system_idea.pojo.Company;
 import com.example.airline_ticket_system_idea.pojo.CompanyAircraft;
+import com.example.airline_ticket_system_idea.pojo.CompanyRoutes;
 import com.example.airline_ticket_system_idea.pojo.Result;
 import com.example.airline_ticket_system_idea.service.CompanyViewService;
 import com.example.airline_ticket_system_idea.util.JwtUtil;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+
 @RestController
 @RequestMapping("/companyView")
 public class CompanyViewController {
@@ -23,5 +24,49 @@ public class CompanyViewController {
      List<CompanyAircraft> caList= companyViewService.list();
      return Result.success(caList);
  }
+@PostMapping("/addAircraft")
+    public Result<CompanyAircraft> addAircraft(@RequestBody CompanyAircraft companyAircraft){
+     String aircraftId=companyAircraft.getAircraftID();
+     if(companyViewService.findAircraftByID(aircraftId)!=null){
+         return Result.error("该飞机编号已经存在");}
+     companyViewService.addAircraft(companyAircraft);
+     return Result.success(companyAircraft);
+ }
+ @PutMapping("/updateAircraft")
+    public Result<CompanyAircraft> updateAircraft(@RequestBody CompanyAircraft companyAircraft){
+     companyViewService.updateAircraft(companyAircraft);
+     return Result.success(companyAircraft);
+ }
+ @DeleteMapping("/deleteAircraft/{aircraftID}")
+    public Result<String> deleteAircraft(@PathVariable("aircraftID") String aircraftID){
+     companyViewService.deleteAircraft(aircraftID);
+     return Result.success("删除成功");
+ }
+   @GetMapping("/routesList")
+    public Result<List<CompanyRoutes>> routesList(){
+     List<CompanyRoutes> crList= companyViewService.routesList();
+     return Result.success(crList);
+    }
+    @PostMapping("/addRoutes")
+    public Result<CompanyRoutes> addRoutes(@RequestBody CompanyRoutes companyRoutes){
+    String routeID=companyRoutes.getRouteID();
+    if(companyViewService.findRoutesByID(routeID)!=null){
+        return Result.error("该航线编号已经存在");}
+    companyViewService.addRoutes(companyRoutes);
+    return Result.success(companyRoutes);
+    }
+    @PutMapping("/updateRoutes")
+    public Result<CompanyRoutes> updateRoutes(@RequestBody CompanyRoutes companyRoutes){
+companyViewService.updateRoutes(companyRoutes);
+return Result.success(companyRoutes);
+    }
+    @DeleteMapping("/deleteRoutes/{routeID}")
+    public Result<String> deleteRoutes(@PathVariable("routeID") String routeID){
+companyViewService.deleteRoutes(routeID);
+return Result.success("删除成功");
+    }
+    }
 
-}
+
+
+

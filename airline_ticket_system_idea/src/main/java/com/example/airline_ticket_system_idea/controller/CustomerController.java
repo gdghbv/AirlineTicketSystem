@@ -7,17 +7,14 @@ import com.example.airline_ticket_system_idea.service.CustomerService;
 import com.example.airline_ticket_system_idea.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.airline_ticket_system_idea.util.Md5Util.checkPassword;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+
 @RestController
 @RequestMapping("customer")
 @Validated
@@ -56,5 +53,10 @@ public class CustomerController {
         } else {
             return Result.error("密码错误");
         }
+    }
+    @PutMapping("updateCustomer")
+    public Result updateCustomer(@RequestBody Customer customer){
+        customerService.updateCustomer(customer);
+        return Result.success("更新成功");
     }
 }

@@ -13,7 +13,7 @@ import java.util.Map;
 
 import static com.example.airline_ticket_system_idea.util.Md5Util.checkPassword;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+
 @RestController
 @RequestMapping("/company")
 public class CompanyController {
@@ -50,12 +50,18 @@ public class CompanyController {
        return Result.error("密码错误");
    }
     @GetMapping("/companyInfo")
-    public Result<Company> companyInfo(@RequestHeader(name="Authorization") String token){
+    public Result<Company> companyInfo(){
 //        Map<String, Object> map = JwtUtil.parseToken(token);
 //        String email = (String) map.get("email");
         Map<String, Object> map = ThreadLocalUtil.get();
         String email = (String) map.get("email");
         Company company = companyService.findCompanyByEmail(email);
         return Result.success(company);
+    }
+    @PutMapping("/updateCompanyInfo")
+    public Result update(@RequestBody Company company){
+
+       companyService.update(company);
+       return Result.success();
     }
 }
