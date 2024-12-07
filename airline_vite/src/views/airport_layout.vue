@@ -13,20 +13,28 @@
                 </el-icon>
                 <span>航班管理</span>
               </el-menu-item>
-              <el-menu-item index="/airport/info">
+
+              <el-menu-item index="/airport/aircraft">
                 <el-icon>
                   <User />
                 </el-icon>
-                <span>机场信息</span>
+                <span>飞机起降信息</span>
               </el-menu-item>
 
               <el-menu-item index="/airport/customer">
                 <el-icon>
                   <User />
                 </el-icon>
-                <span>客户信息</span>
+                <span>管理客户信息</span>
               </el-menu-item>
 
+              <el-menu-item index="/airport/info">
+                <el-icon>
+                  <User />
+                </el-icon>
+                <span>机场信息</span>
+              </el-menu-item>
+              
             </el-menu>
           </el-aside>
           <el-main>

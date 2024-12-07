@@ -9,6 +9,7 @@ import airport_layout from "@/views/airport_layout.vue";
 import airport_info from "@/components/airport_info.vue";
 import airport_flight from "@/components/airport_flight.vue";
 import airport_customer from "@/components/airport_customer.vue";
+import airport_aircraft from "@/components/airport_aircraft.vue";
 
 //定义路由关系
 const routes =[
@@ -26,6 +27,7 @@ const routes =[
         {path:'/airport/info',component:airport_info},
         {path:'/airport/flight',component:airport_flight},
         {path:'/airport/customer',component:airport_customer},
+        {path:'/airport/aircraft',component:airport_aircraft},
     ]},
 ]
 
