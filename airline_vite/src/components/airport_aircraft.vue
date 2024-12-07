@@ -21,6 +21,57 @@ const clearData = () => {
     }
 }
 
+import { aircraftListService, aircraftAddService, aircraftDeleteService, aircraftUpdateService } from '@/api/airport_view'
+const aircraftList = async () => {
+    let result = await aircraftListService();
+console.log(result);
+    aircraft.value = result.data;
+   
+}
+aircraftList();
+import { ElMessage } from 'element-plus'
+const addAircraft = async () => {
+    let result = await aircraftAddService(addAircraftData.value);
+    ElMessage.success(result.msg ? result.msg : '添加成功');
+    dialogVisible.value = false;
+    aircraftList();
+}
+const updateAircraft = async () => {
+    let result = await aircraftUpdateService(addAircraftData.value);
+    ElMessage.success(result.msg ? result.msg : '修改成功');
+    dialogVisible.value = false;
+    aircraftList();
+}
+import { ElMessageBox } from 'element-plus'
+const aircraftDelete = async (row) => {
+    ElMessageBox.confirm(
+        '你确认要删除该飞机信息吗?',
+        '温馨提示',
+        {
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            type: 'warning',
+        }
+    )
+        .then(async () => {
+            //调用接口
+            let result = await aircraftDeleteService(row.aircraftID);
+            ElMessage({
+                type: 'success',
+                message:  '删除成功',
+            })
+            //刷新列表
+            aircraftList();
+        })
+        .catch(() => {
+            ElMessage({
+                type: 'info',
+                message: '用户取消了删除',
+            })
+        })
+}
+
+
 const showDialog = (row) => {
     dialogVisible.value = true;
     title.value = '编辑飞机起降信息';
