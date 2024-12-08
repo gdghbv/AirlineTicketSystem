@@ -1,11 +1,24 @@
+
+
 <template>
   <div class="common-layout">
+    
+    <img src="E:\air\airline_vite\src\assets\蓝天白云.png">
+    
+    
+    
     <el-container class="layout-container">
-      <el-header>航空公司菜单</el-header>
+      <!--左侧菜单---->
       <el-container>
         <el-aside width="200px">
           <div class="el-aside__logo"></div>
           <!-- element-plus的菜单标签 -->
+          <!--公司logo-->
+          <el-empty
+              image="https://ooo.0x0.ooo/2024/12/07/OL0L46.gif"
+              description=" "
+          />
+          
           <el-menu active-text-color="#ffd04b" background-color="#232323" text-color="#fff" router>
             <el-menu-item index="/company/submitAirline">
               <el-icon>

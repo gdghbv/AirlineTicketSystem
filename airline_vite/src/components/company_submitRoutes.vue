@@ -42,7 +42,7 @@ const routesList = async () => {
    
 }
 routesList();
-import { ElMessage } from 'element-plus'
+import { avatarEmits, ElMessage } from 'element-plus'
 const addRoutes = async () => {
     let result = await routesAddService(addRoutesData.value);
     ElMessage.success(result.msg ? result.msg : '添加成功');
@@ -86,8 +86,11 @@ const routeDelete = async (row) => {
 </script>
 
 <template>
+
+    
     <el-card class="page-container">
         <template #header>
+            
             <div class="header">
             <span>公司航线信息</span>
             <div class="extra">

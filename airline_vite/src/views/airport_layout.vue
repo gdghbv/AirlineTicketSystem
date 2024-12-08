@@ -3,6 +3,7 @@
       <el-container class="layout-container">
         <el-header>机场菜单</el-header>
         <el-container>
+          <!--左侧菜单-->
           <el-aside width="200px">
             <div class="el-aside__logo"></div>
             <!-- element-plus的菜单标签 -->
