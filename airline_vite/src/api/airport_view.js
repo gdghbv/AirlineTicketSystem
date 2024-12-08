@@ -16,3 +16,15 @@ export const flightDeleteService = (id)=>{
 export const flightUpdateService = (data)=>{
     return request.put('/airportView/updateFlight',data)
 }
+export const aircraftListService =()=>{
+    return request.get('/airportView/aircraftList')
+}
+export const aircraftAddService = (data)=>{
+    return request.post('/airportView/addAircraft',data)
+}
+export const aircraftDeleteService = (id)=>{
+    return request.delete('/airportView/deleteAircraft/'+id)
+}
+export const aircraftUpdateService = (data)=>{
+    return request.put('/airportView/updateAircraft',data)
+}
