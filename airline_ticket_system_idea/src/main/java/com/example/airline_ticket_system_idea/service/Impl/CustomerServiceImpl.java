@@ -27,9 +27,4 @@ public class CustomerServiceImpl implements CustomerService {
         String md5String = Md5Util.getMD5String(password);
         customerMapper.add(citizenID,email,md5String);
     }
-
-    @Override
-    public void updateCustomer(Customer customer) {
-        customerMapper.updateCustomer(customer);
-    }
 }

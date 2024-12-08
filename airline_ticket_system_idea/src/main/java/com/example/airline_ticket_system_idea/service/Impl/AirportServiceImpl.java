@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 public class AirportServiceImpl implements AirportService {
     @Autowired
     private AirportMapper airportMapper;
+
+
+
     @Override
     public Airport getAirportByEmail(String email) {
         Airport airport=airportMapper.findAirportByEmail(email);

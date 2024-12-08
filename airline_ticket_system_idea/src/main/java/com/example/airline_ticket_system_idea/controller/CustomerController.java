@@ -7,8 +7,12 @@ import com.example.airline_ticket_system_idea.service.CustomerService;
 import com.example.airline_ticket_system_idea.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.Pattern;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,10 +57,5 @@ public class CustomerController {
         } else {
             return Result.error("密码错误");
         }
-    }
-    @PutMapping("updateCustomer")
-    public Result updateCustomer(@RequestBody Customer customer){
-        customerService.updateCustomer(customer);
-        return Result.success("更新成功");
     }
 }

@@ -1,7 +1,10 @@
 package com.example.airline_ticket_system_idea.mapper;
 
 import com.example.airline_ticket_system_idea.pojo.Customer;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface CustomerMapper {
@@ -13,7 +16,4 @@ public interface CustomerMapper {
     @Insert("INSERT INTO customer_info(citizenID, email,password)"+
             "VALUES(#{citizenID},#{email},#{password})")
    void add(@Param("citizenID") String citizenID,@Param("email") String email, @Param("password") String password);
-
-    @Update("UPDATE customer_info SET citizenID=#{citizenID},email=#{email} WHERE email=#{email}")
-    void updateCustomer(Customer customer);
 }

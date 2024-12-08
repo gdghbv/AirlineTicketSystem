@@ -13,4 +13,7 @@ public interface AirportMapper {
 
     @Insert("INSERT INTO airport_info(airportID,email,password)"+"VALUES(#{airportID},#{email},#{password})")
     void add(@Param("airportID") String airportID, @Param("email") String email, @Param("password") String password);
+
+
+
 }

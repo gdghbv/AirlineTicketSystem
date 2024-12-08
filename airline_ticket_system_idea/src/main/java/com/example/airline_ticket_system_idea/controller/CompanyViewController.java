@@ -37,7 +37,7 @@ public class CompanyViewController {
      companyViewService.updateAircraft(companyAircraft);
      return Result.success(companyAircraft);
  }
- @DeleteMapping("/deleteAircraft/{aircraftID}")
+ @DeleteMapping("/deleteAircraft/{aircraftId}")
     public Result<String> deleteAircraft(@PathVariable("aircraftID") String aircraftID){
      companyViewService.deleteAircraft(aircraftID);
      return Result.success("删除成功");
@@ -60,8 +60,8 @@ public class CompanyViewController {
 companyViewService.updateRoutes(companyRoutes);
 return Result.success(companyRoutes);
     }
-    @DeleteMapping("/deleteRoutes/{routeID}")
-    public Result<String> deleteRoutes(@PathVariable("routeID") String routeID){
+    @DeleteMapping("/deleteRoutes/{routeId}")
+    public Result<String> deleteRoutes(@PathVariable("routeId") String routeID){
 companyViewService.deleteRoutes(routeID);
 return Result.success("删除成功");
     }

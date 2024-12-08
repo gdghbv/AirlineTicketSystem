@@ -11,7 +11,6 @@ public class Company {
     private String companyName;
     private String companyAddress;
     private String phone;
-
     private String email;
     @JsonIgnore
     private String password;
