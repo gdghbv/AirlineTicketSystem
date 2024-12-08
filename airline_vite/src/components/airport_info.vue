@@ -8,7 +8,7 @@
           <span>机场信息</span>
         </div>
           <div class="name-role">
-          <span class="sender">Admin - {{dataForm.nickName}}</span>  
+          <span class="sender">Admin - {{dataForm?.airportID}}</span>  
         </div>
         <div class="registe-info">
           <span class="registe-info">
@@ -19,16 +19,16 @@
         </div>
         <el-divider></el-divider>
         <div class="personal-relation">
-        <div class="relation-item">邮箱:  <div style="float: right; padding-right:20px;">{{dataForm.email}}</div></div>
+        <div class="relation-item">邮箱:  <div style="float: right; padding-right:20px;">{{dataForm?.email}}</div></div>
     </div>
     <div class="personal-relation">
-      <div class="relation-item">机场名称:  <div style="float: right; padding-right:20px;">杭州诚聚</div></div> 
+      <div class="relation-item">机场名称:  <div style="float: right; padding-right:20px;">{{data.Form?.airportName}}</div></div> 
     </div>
        <div class="personal-relation">
-      <div class="relation-item">机场电话:  <div style="float: right; padding-right:20px;">{{dataForm.phone}}</div></div>      
+      <div class="relation-item">机场电话:  <div style="float: right; padding-right:20px;">{{dataForm?.phone}}</div></div>      
     </div>
     <div class="personal-relation">
-      <div class="relation-item">机场地址:  <div style="float: right; padding-right:20px;">{{dataForm.add}}</div></div>      
+      <div class="relation-item">机场地址:  <div style="float: right; padding-right:20px;">{{dataForm?.airportAddress}}</div></div>      
     </div>
     
       </el-card>
@@ -39,15 +39,22 @@
     </div>
 </template>
 
-<script>
-export default {
-  data(){
-    return{
-      dataForm:{
-      }
-    }
-  }
+<script set up>
+import { ref } from 'vue'
+const dataForm = ref({
+  email: ' ',
+  airportName:' ',
+  phone: ' ',
+  airportAddress: ' ',
+  airportID: ' ',
+
+})
+import { airportInfoService } from '@/api/airport_view';
+const getAirportInfo = async () => {
+  const res = await airportInfoService();
+  dataForm.value = res.data;
 }
+dataForm.value = getAirportInfo();
 </script>
 
 <style lang="scss" scoped>

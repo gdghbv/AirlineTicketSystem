@@ -16,6 +16,9 @@ export const flightDeleteService = (id)=>{
 export const flightUpdateService = (data)=>{
     return request.put('/airportView/updateFlight',data)
 }
+export const flightDelayService = (data)=>{
+    return request.put('/airportView/delayFlight',data)
+}
 export const aircraftListService =()=>{
     return request.get('/airportView/aircraftList')
 }
@@ -27,4 +30,16 @@ export const aircraftDeleteService = (id)=>{
 }
 export const aircraftUpdateService = (data)=>{
     return request.put('/airportView/updateAircraft',data)
+}
+export const customerListService =()=>{
+    return request.get('/airportView/customerList')
+}
+export const customerUpdateService = (data)=>{
+    return request.put('/airportView/updateCustomer',data)
+}
+export const customerDeleteService = (id)=>{
+    return request.delete('/airportView/deleteCustomer/'+id)
+}
+export const airportInfoService =()=>{
+    return request.get('/airportView/airportInfo')
 }

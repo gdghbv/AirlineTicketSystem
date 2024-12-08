@@ -22,7 +22,7 @@ const routes =[
         {path:'/company/submitAirline',component:company_submitAirline},
     ]},
     {path: '/airport', component: airport_layout,
-        redirect: '/airport/info',
+        redirect: '/airport/flight',
         children:[
         {path:'/airport/info',component:airport_info},
         {path:'/airport/flight',component:airport_flight},
