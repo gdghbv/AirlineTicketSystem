@@ -7,10 +7,7 @@ import com.example.airline_ticket_system_idea.pojo.Result;
 import com.example.airline_ticket_system_idea.service.Impl.AirportServiceImpl;
 import com.example.airline_ticket_system_idea.service.Impl.AirportViewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,13 +25,22 @@ public class AirportViewController {
 }
 
         @PostMapping("/addAirportFlightInfo")
-        public Result<String> addAirport(Airport airport) {
-
-            return Result.success("添加成功");
-        }
-
-
-
-
+        public Result<String> addAirportAirline( AirportAirline airportAirline) {
+             if(AirportViewServiceImpl.findAirportAirline(airportAirline.getFlightID())!= null) {
+                 return Result.error("该机场航班已存在");
+             }
+            AirportViewServiceImpl.addAirportAirline(airportAirline);
+            return Result.success("添加成功");}
 
 }
+
+
+
+
+
+
+
+
+
+
+

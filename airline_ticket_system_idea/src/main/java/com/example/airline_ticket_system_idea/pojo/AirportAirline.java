@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class AirportAirline {
     private String origin;
     private String destination;
-    private String originiAirport;
+    private String originAirport;
     private String destinationAirport;
     private String flightID;
     private String aircraftID;

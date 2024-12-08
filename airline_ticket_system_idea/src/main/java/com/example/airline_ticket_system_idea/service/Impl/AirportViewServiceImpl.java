@@ -21,8 +21,17 @@ public class AirportViewServiceImpl implements AirportViewService {
     public List<AirportAirline> getAirlineList() {
         Map<String ,Object> map= ThreadLocalUtil.get();
     String airportID=(String) map.get("airportID");
-
         return AirportViewMapper.getAirlineList(airportID);
+    }
+
+    @Override
+    public void addAirportAirline(AirportAirline airportAirline) {
+         AirportViewMapper.addAirportAirline(airportAirline);
+    }
+
+    @Override
+    public AirportAirline findAirportAirline(String flightId) {
+        return AirportViewMapper.findAirportAirline(flightId);
     }
 
 

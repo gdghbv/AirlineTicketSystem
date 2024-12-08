@@ -1,6 +1,7 @@
 package com.example.airline_ticket_system_idea.mapper;
 
 import com.example.airline_ticket_system_idea.pojo.Airport;
+import com.example.airline_ticket_system_idea.pojo.AirportAirline;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,4 +14,8 @@ public interface AirportMapper {
 
     @Insert("INSERT INTO airport_info(airportID,email,password)"+"VALUES(#{airportID},#{email},#{password})")
     void add(@Param("airportID") String airportID, @Param("email") String email, @Param("password") String password);
+
+
+    @Select("SELECT * FROM airport_flight_info WHERE aircraftID=#{aircraftID}")
+    AirportAirline findAirportByAircraftID(String aircraftID);
 }

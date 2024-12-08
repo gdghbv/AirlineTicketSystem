@@ -9,4 +9,11 @@ public interface AirportViewService {
 
 
     List<AirportAirline> getAirlineList();
+
+
+
+
+    void addAirportAirline(AirportAirline airportAirline);
+
+    AirportAirline findAirportAirline(String aircraftId);
 }
