@@ -1,20 +1,19 @@
 package com.example.airline_ticket_system_idea.mapper;
 
 
-
-import com.example.airline_ticket_system_idea.pojo.Customer;
+import com.example.airline_ticket_system_idea.pojo.AirportFlight;
+import com.example.airline_ticket_system_idea.pojo.CompanyRoutes;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface CustomerViewMapper {
 
+    @Select("Select * from airport_flight_info")
+    List<AirportFlight> getFlightList();
 
-    @Select("SELECT * FROM customer_info where citizenID = #{customerId}")
-    Customer getCustomerMessages(String citizenId);
-
-
-
-    @Select("update customer_info set name = #{name}, phoneNumber = #{phone}, points = #{points} where email = #{email}")
-    void updateCustomerMessages(Customer customer);
+@Select("Select * from company_routes_info where route_id = #{routeId}")
+    CompanyRoutes getCompanyRoutes(String routeId);
 }

@@ -2,7 +2,28 @@ package com.example.airline_ticket_system_idea.pojo;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class CustomerTicketInfo {
+private Date dateTime;
+private String status;
+private String flightID;
+private String email;
+
+    //  这是航班相关信息
+    private String routeID;
+    private String aircraftID;
+    private String origin;
+    private String destination;
+    private String originAirport;
+    private String destinationAirport;
+    private String companyID;
+    private String airportID;;
+    private String departureTime;
+    private String boardingGate;
+    private String price;
+    private String delay;
+    private int seatCount;
 
 }

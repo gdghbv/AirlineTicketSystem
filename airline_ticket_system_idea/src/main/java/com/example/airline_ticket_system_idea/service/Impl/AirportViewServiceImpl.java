@@ -43,11 +43,16 @@ public class AirportViewServiceImpl implements AirportViewService {
 
     @Override
     public void addFlight(AirportFlight airportFlight) {
+        CompanyRoutes companyRoute = airportViewMapper.getCompanyRoute(airportFlight.getRouteID());
+        CompanyAircraft companyAircraft = airportViewMapper.getCompanyAircraft(companyRoute.getAircraftID());
+
+        airportFlight.setSeatCount(companyAircraft.getSeatCount());
         airportViewMapper.addFlight(airportFlight);
     }
 
     @Override
     public void updateFlight(AirportFlight airportFlight) {
+
         airportViewMapper.updateFlight(airportFlight);
     }
 

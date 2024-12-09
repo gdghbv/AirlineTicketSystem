@@ -19,5 +19,6 @@ public class AirportFlight {
     private String boardingGate;
     private String price;
     private String delay;
+    private int seatCount;
 
 }

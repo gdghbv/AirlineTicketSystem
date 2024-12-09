@@ -10,6 +10,8 @@ import airport_flight from "@/components/airport_flight.vue";
 import airport_customer from "@/components/airport_customer.vue";
 import airport_aircraft from "@/components/airport_aircraft.vue";
 import airport_info from "@/components/airport_info.vue";
+import Customer_layout from "@/views/customer_layout.vue";
+import Customer_bill from "@/components/customer_bill.vue";
 
 //定义路由关系
 const routes =[
@@ -28,7 +30,15 @@ const routes =[
         {path:'/airport/flight',component:airport_flight},
         {path:'/airport/customer',component:airport_customer},
         {path:'/airport/aircraft',component:airport_aircraft},
-    ]},
+    ]}, 
+     {path: '/customer', component: Customer_layout,
+        redirect: '/customer/bill',
+        children:[
+        {path:'/customer/bill',component:Customer_bill},
+        {path:'/customer/ticket',component:airport_flight},
+        {path:'/customer/info',component:airport_customer},
+        
+    ]}
 ]
 
 //创建路由器

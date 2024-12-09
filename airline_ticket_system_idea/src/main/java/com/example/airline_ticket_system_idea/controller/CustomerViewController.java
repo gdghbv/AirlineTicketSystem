@@ -1,43 +1,31 @@
 package com.example.airline_ticket_system_idea.controller;
 
-
-import com.example.airline_ticket_system_idea.pojo.Customer;
+import com.example.airline_ticket_system_idea.pojo.AirportFlight;
 import com.example.airline_ticket_system_idea.pojo.Result;
-import com.example.airline_ticket_system_idea.service.CustomerService;
-import com.example.airline_ticket_system_idea.service.Impl.CustomerViewServiceImpl;
-import com.example.airline_ticket_system_idea.util.JwtUtil;
-import com.example.airline_ticket_system_idea.util.ThreadLocalUtil;
-import lombok.extern.slf4j.Slf4j;
+import com.example.airline_ticket_system_idea.service.CustomerViewService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Map;
+import java.util.List;
 
-@Slf4j
-@RestController
-@RequestMapping("/CustomerView")
+@Controller
+@RequestMapping("/customerView")
 public class CustomerViewController {
-
-
     @Autowired
-    private CustomerViewServiceImpl CustomerViewServiceImpl;
+    private CustomerViewService customerViewService;
 
-    @GetMapping("/CustomerMessages")
-    public Result<Customer> getCustomerView(){
-             Map<String, Object> claims = ThreadLocalUtil.get();
-             String citizenId = (String) claims.get("citizenID");
-       Customer customer= CustomerViewServiceImpl.getCustomerMessages(citizenId);
-               log.info("CustomerMessages: "+customer);
-        return Result.success(customer);
+    @GetMapping("/flightList")
+    public Result<List<AirportFlight>> getFlightList() {
+       List<AirportFlight> flightList = customerViewService.getFlightList();
+        return Result.success(flightList);
     }
-
-
-            @PostMapping("/updateCustomerMessages")
-        public Result updateCustomerMessages(Customer customer) {
-                      Map<String, Object> claims = ThreadLocalUtil.get();
-                      String citizenId = (String) claims.get("citizenID");
-                      customer.setCitizenID(citizenId);
-                      CustomerViewServiceImpl.updateCustomerMessages(customer);
-                      return Result.success("修改成功");
-            }
+    @PostMapping("/orderFlight")
+    public Result<String> orderFlight(@RequestBody AirportFlight airportFlight){
+        customerViewService.orderFlight(airportFlight);
+        return Result.success("订购成功");
+    }
 }

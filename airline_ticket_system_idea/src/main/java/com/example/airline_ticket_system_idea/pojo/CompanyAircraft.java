@@ -6,6 +6,7 @@ import lombok.Data;
 public class CompanyAircraft {
 private String aircraftType;
 private String aircraftID;
-private String seatCount;
+
 private String companyID;
+private int seatCount;
 }

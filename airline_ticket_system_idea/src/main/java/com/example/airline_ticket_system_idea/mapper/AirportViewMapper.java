@@ -8,14 +8,17 @@ import java.util.List;
 @Mapper
 public interface AirportViewMapper {
 
-//机场航班
-    @Select("SELECT * FROM airport_flight_info WHERE airportID= #{airportID}")
+    //机场航班
+    @Select("SELECT * FROM airport_flight_info " +
+            "WHERE airportID= #{airportID}")
     List<AirportFlight> getFlightList(String airportID);
 
-    @Select("SELECT * FROM company_routes_info WHERE routeID= #{routeID}")
+    @Select("SELECT * FROM company_routes_info " +
+            "WHERE routeID= #{routeID}")
     CompanyRoutes getCompanyRoute(String routeId);
 
-    @Insert("INSERT INTO airport_flight_info (airportID,routeID,flightID,departureTime,boardingGate,price,delay) VALUES (#{airportID},#{routeID},#{flightID},#{departureTime},#{boardingGate},#{price},'否')")
+    @Insert("INSERT INTO airport_flight_info (airportID,routeID,flightID,departureTime,boardingGate,price,delay,seatCount) " +
+            "VALUES (#{airportID},#{routeID},#{flightID},#{departureTime},#{boardingGate},#{price},'否',#{seatCount})")
     void addFlight(AirportFlight airportFlight);
 
     @Update("UPDATE airport_flight_info SET airportID= #{airportID},routeID= #{routeID},flightID= #{flightID}," +
@@ -28,7 +31,7 @@ public interface AirportViewMapper {
     @Update("UPDATE airport_flight_info SET delay= '是' WHERE flightID= #{flightID}")
     void delayFlight(String flightID, String delayTime);
 
-//    机场飞机管理
+    //    机场飞机管理
     @Select("SELECT * FROM airport_aircraft Where airportID= #{airportID}")
     List<AirportAircraft> getAircraftList(String airportID);
 
@@ -46,15 +49,21 @@ public interface AirportViewMapper {
 
     @Update("UPDATE airport_aircraft SET aircraftID= #{aircraftID},airportID= #{airportID},status= #{status} WHERE aircraftID= #{aircraftID}")
     void updateAircraft(AirportAircraft airportAircraft);
+
     //机场客户信息管理
     @Select("SELECT * FROM customer_info")
     List<Customer> getCustomerList();
-@Delete("DELETE FROM customer_info WHERE email= #{email}")
-    void deleteCustomer(String email);
-@Update("UPDATE customer_info SET name= #{name},email= #{email},phone= #{phone},address= #{address},password= #{password} WHERE email= #{email}")
-    void updateCustomer(Customer customer);
-}
 
+    @Delete("DELETE FROM customer_info WHERE email= #{email}")
+    void deleteCustomer(String email);
+
+    @Update("UPDATE customer_info SET name= #{name},email= #{email},phone= #{phone},address= #{address},password= #{password} WHERE email= #{email}")
+    void updateCustomer(Customer customer);
+@Select("SELECT seatCount FROM company_aircraft_info WHERE aircraftID= #{aircraftID}")
+    CompanyAircraft getCompanyAircraft(String aircraftID);
+
+
+}
 
 
 //机场信息

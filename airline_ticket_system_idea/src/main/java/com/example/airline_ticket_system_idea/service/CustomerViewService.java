@@ -1,10 +1,11 @@
 package com.example.airline_ticket_system_idea.service;
 
+import com.example.airline_ticket_system_idea.pojo.AirportFlight;
 import com.example.airline_ticket_system_idea.pojo.Customer;
 
+import java.util.List;
+
 public interface CustomerViewService {
-    Customer getCustomerMessages(String citizenId);
 
-
-    void updateCustomerMessages(Customer customer);
+    List<AirportFlight> getFlightList();
 }
