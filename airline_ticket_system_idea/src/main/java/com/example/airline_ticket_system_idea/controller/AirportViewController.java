@@ -3,6 +3,7 @@ package com.example.airline_ticket_system_idea.controller;
 
 import com.example.airline_ticket_system_idea.pojo.AirportAircraft;
 import com.example.airline_ticket_system_idea.pojo.AirportFlight;
+import com.example.airline_ticket_system_idea.pojo.Customer;
 import com.example.airline_ticket_system_idea.pojo.Result;
 import com.example.airline_ticket_system_idea.service.AirportViewService;
 import org.apache.ibatis.annotations.Delete;
@@ -11,12 +12,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/airportView")
 public class AirportViewController {
     @Autowired
     private AirportViewService airportViewService;
-
+    //机场航班mapping
     @GetMapping("/flightList")
     public Result<List<AirportFlight>> getFlightList() {
         List<AirportFlight> flightList = airportViewService.getFlightList();
@@ -33,8 +35,8 @@ public class AirportViewController {
         airportViewService.updateFlight(airportFlight);
         return Result.success("更新成功");
     }
-    @DeleteMapping("/deleteFlight/{id}")
-    public Result<String> deleteFlight(String flightID){
+    @DeleteMapping("/deleteFlight/{flightID}")
+    public Result<String> deleteFlight(@PathVariable ("flightID")String flightID){
         airportViewService.deleteFlight(flightID);
         return Result.success("删除成功");
     }
@@ -43,6 +45,8 @@ public class AirportViewController {
       airportViewService.delayFlight(flightID,delayTime);
         return Result.success("延误成功");
     }
+
+    //机场飞机Mapping
     @GetMapping("/aircraftList")
     public Result<List<AirportAircraft>> getAircraftList() {
        List<AirportAircraft>    aircraftList = airportViewService.getAircraftList();
@@ -55,8 +59,8 @@ public class AirportViewController {
         airportViewService.addAircraft(airportAircraft);
         return Result.success("添加成功");
     }
-    @DeleteMapping("/deleteAircraft")
-    public Result<String> deleteAircraft(String aircraftID) {
+    @DeleteMapping("/deleteAircraft/{aircraftID}")
+    public Result<String> deleteAircraft(@PathVariable ("aircraftID") String aircraftID) {
     airportViewService.deleteAircraft(aircraftID);
     return Result.success("删除成功");
     }
@@ -64,7 +68,26 @@ public class AirportViewController {
     public Result<String> updateAircraft(@RequestBody AirportAircraft airportAircraft){
         airportViewService.updateAircraft(airportAircraft);
         return Result.success("更新成功");
-    }}
+    }
+//机场客户Mapping
+    @GetMapping("/customerList")
+    public Result<List<Customer>> getCustomerList() {
+        List<Customer> customerList = airportViewService.getCustomerList();
+        return Result.success(customerList);
+
+    }
+    @DeleteMapping("/deleteCustomer/{email}")
+    public Result<String> deleteCustomer( @PathVariable ("email")String email){
+        airportViewService.deleteCustomer(email);
+        return Result.success("删除成功");
+    }
+    @PutMapping("/updateCustomer")
+    public Result<String> updateCustomer(@RequestBody Customer customer){
+        airportViewService.updateCustomer(customer);
+        return Result.success("更新成功");
+
+}
+}
 
 
 

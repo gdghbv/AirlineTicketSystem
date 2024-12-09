@@ -31,6 +31,7 @@ export const aircraftDeleteService = (id)=>{
 export const aircraftUpdateService = (data)=>{
     return request.put('/airportView/updateAircraft',data)
 }
+// 机场管理顾客用api
 export const customerListService =()=>{
     return request.get('/airportView/customerList')
 }

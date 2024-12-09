@@ -25,9 +25,9 @@ const clearData = () => {
 import { aircraftListService, aircraftAddService, aircraftDeleteService, aircraftUpdateService } from '@/api/company_view'
 const aircraftList = async () => {
     let result = await aircraftListService();
-console.log(result);
+    console.log(result);
     aircraft.value = result.data;
-   
+
 }
 aircraftList();
 import { ElMessage } from 'element-plus'
@@ -59,7 +59,7 @@ const aircraftDelete = async (row) => {
             let result = await aircraftDeleteService(row.aircraftID);
             ElMessage({
                 type: 'success',
-                message:  '删除成功',
+                message: '删除成功',
             })
             //刷新列表
             aircraftList();
@@ -121,7 +121,8 @@ const showDialog = (row) => {
             </el-form>
             <template #footer>
                 <span class="dialog-footer">
-                    <el-button type="primary" @click="title == '添加分类' ? addAircraft() : updateAircraft()">确 定</el-button>
+                    <el-button type="primary" @click="title == '添加分类' ? addAircraft() : updateAircraft()">确
+                        定</el-button>
                     <el-button @click="dialogVisible = false">取 消</el-button>
                 </span>
             </template>

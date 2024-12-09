@@ -76,8 +76,8 @@ public class AirportViewServiceImpl implements AirportViewService {
     @Override
     public void addAircraft(AirportAircraft airportAircraft) {
         Map<String, Object> map = ThreadLocalUtil.get();
-        String airportId=(String) map.get("airportID");
-      airportAircraft.setAirportID(airportId);
+        String airportId = (String) map.get("airportID");
+        airportAircraft.setAirportID(airportId);
         airportViewMapper.addAircraft(airportAircraft);
     }
 
@@ -89,6 +89,22 @@ public class AirportViewServiceImpl implements AirportViewService {
     @Override
     public void updateAircraft(AirportAircraft airportAircraft) {
         airportViewMapper.updateAircraft(airportAircraft);
+
+    }
+
+    @Override
+    public List<Customer> getCustomerList() {
+        return airportViewMapper.getCustomerList();
+    }
+
+    @Override
+    public void deleteCustomer(String email) {
+        airportViewMapper.deleteCustomer(email);
+    }
+
+    @Override
+    public void updateCustomer(Customer customer) {
+        airportViewMapper.updateCustomer(customer);
 
     }
 

@@ -25,4 +25,10 @@ public interface AirportViewService {
     void deleteAircraft(String aircraftID);
 
     void updateAircraft(AirportAircraft airportAircraft);
+
+    List<Customer> getCustomerList();
+
+    void deleteCustomer(String email);
+
+    void updateCustomer(Customer customer);
 }

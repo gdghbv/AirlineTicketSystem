@@ -37,7 +37,7 @@ public class CompanyViewController {
      companyViewService.updateAircraft(companyAircraft);
      return Result.success(companyAircraft);
  }
- @DeleteMapping("/deleteAircraft/{aircraftId}")
+ @DeleteMapping("/deleteAircraft/{aircraftID}")
     public Result<String> deleteAircraft(@PathVariable("aircraftID") String aircraftID){
      companyViewService.deleteAircraft(aircraftID);
      return Result.success("删除成功");
