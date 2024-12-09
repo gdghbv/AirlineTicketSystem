@@ -1,6 +1,7 @@
 import request from '@/utils/request'
 import { useTokenStore } from '@/stores/token'
 
+// 机场航班接口
 export const flightListService =()=>{
     const tokenStore = useTokenStore()
     // return request.get('/airportView/aircraftList',{headers: {'Authorization': tokenStore.token}})
@@ -19,6 +20,7 @@ export const flightUpdateService = (data)=>{
 export const flightDelayService = (data)=>{
     return request.put('/airportView/delayFlight',data)
 }
+//机场飞机接口
 export const aircraftListService =()=>{
     return request.get('/airportView/aircraftList')
 }
@@ -31,6 +33,7 @@ export const aircraftDeleteService = (id)=>{
 export const aircraftUpdateService = (data)=>{
     return request.put('/airportView/updateAircraft',data)
 }
+// 机场客户接口
 export const customerListService =()=>{
     return request.get('/airportView/customerList')
 }

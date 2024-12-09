@@ -5,23 +5,28 @@ import { ref } from 'vue';
 
 const dialogVisible = ref(false)
 const aircraft = ref([{
+    airportID: '',
+    aircraftID:'',
+    statis: '',
+    airportName: '',
+    aircraftType: '',
+    companyID: '',
 }
 ])
 const title = ref('')
 const addAircraftData = ref({
-    aircraftType: '',
-    aircraftID: '',
-    companyID: ''
+    airportID: '',
+    aircraftID:'',
+    statis: '',
 })
 const clearData = () => {
     addAircraftData.value = {
-        aircraftType: '',
-        aircraftID: '',
-        companyID: ''
+    airportID: '',
+    aircraftID:'',
+    statis: '',
     }
 }
-
-import { aircraftListService, aircraftAddService, aircraftDeleteService, aircraftUpdateService } from '@/api/airport_view'
+import { aircraftListService, aircraftAddService, aircraftDeleteService, aircraftUpdateService } from '@/api/company_view'
 const aircraftList = async () => {
     let result = await aircraftListService();
 console.log(result);
@@ -70,11 +75,9 @@ const aircraftDelete = async (row) => {
             })
         })
 }
-
-
 const showDialog = (row) => {
     dialogVisible.value = true;
-    title.value = '编辑飞机起降信息';
+    title.value = '编辑飞机信息';
     addAircraftData.value = row;
 }
 
@@ -84,7 +87,7 @@ const showDialog = (row) => {
     <el-card class="page-container">
         <template #header>
             <div class="header">
-                <span>飞机起降信息</span>
+                <span>公司飞机信息</span>
                 <div class="extra">
                     <el-button type="primary"
                         @click="dialogVisible = true; title = '添加分类'; clearData()">添加飞机</el-button>
@@ -95,6 +98,7 @@ const showDialog = (row) => {
             <el-table-column label="序号" width="100" type="index"></el-table-column>
             <el-table-column label="飞机型号" prop="aircraftType"></el-table-column>
             <el-table-column label="飞机编号" prop="aircraftID"></el-table-column>
+            <el-table-column label="座位数" prop="seatCount"></el-table-column>
             <el-table-column label="所属公司代码" prop="companyID"></el-table-column>
             <el-table-column label="操作">
                 <template #default="{ row }">
@@ -111,6 +115,9 @@ const showDialog = (row) => {
                 </el-form-item>
                 <el-form-item label="飞机编号" prop="aircraftID">
                     <el-input v-model="addAircraftData.aircraftID" placeholder="请输入飞机编号"></el-input>
+                </el-form-item>
+                <el-form-item label="座位数" prop="seatCount">
+                    <el-input v-model="addAircraftData.seatCount" placeholder="请输入座位数"></el-input>
                 </el-form-item>
                 <el-form-item label="所属公司代码" prop="companyID">
                     <el-input v-model="addAircraftData.companyID" placeholder="请输入公司代码"></el-input>
