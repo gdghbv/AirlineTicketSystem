@@ -12,7 +12,7 @@ public class Customer {
     private String name;
     private String phone;
     private String gender;
-    private String points;
+    private double points;
     private String email;
     private String password;
 }

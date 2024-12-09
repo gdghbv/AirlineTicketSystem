@@ -57,4 +57,41 @@ String routeId=airportFlight.getRouteID();
        int addPoints=(int)(flight.getPrice()/10);
        customer.setPoints(customer.getPoints()+addPoints);}
     }
+
+    @Override
+    public List<CustomerTicketInfo> getBillList() {
+        Map<String ,Object> map=ThreadLocalUtil.get();
+        String email=(String)map.get("email");
+        List<CustomerTicketInfo> customerTicketInfos=customerViewMapper.getBillList(email);
+        for(CustomerTicketInfo customerTicketInfo:customerTicketInfos){
+            String flightID=customerTicketInfo.getFlightID();
+            AirportFlight airportFlight=customerViewMapper.getCustomerFlight(flightID);
+            customerTicketInfo.setOrigin(airportFlight.getOrigin());
+            customerTicketInfo.setDestination(airportFlight.getDestination());
+            customerTicketInfo.setDepartureTime(airportFlight.getDepartureTime());
+            customerTicketInfo.setBoardingGate(airportFlight.getBoardingGate());
+            customerTicketInfo.setPrice(airportFlight.getPrice());
+            customerTicketInfo.setOriginAirport(airportFlight.getOriginAirport());
+            customerTicketInfo.setDestinationAirport(airportFlight.getDestinationAirport());
+            customerTicketInfo.setAircraftID(airportFlight.getAircraftID());
+        }
+
+        return customerTicketInfos;
+    }
+
+    @Override
+    public void billRetreat(String ticketID) {
+
+        Map<String ,Object> map=ThreadLocalUtil.get();
+        String email=(String) map.get("email");
+        Customer customer=customerViewMapper.getCustomerInfo(email);
+        customerViewMapper.billRetreat(ticketID);
+        //对于turbojet的退票，扣除相应的积分并额外扣除50积分
+        if(customer.getPhone()!=null){
+            CustomerTicketInfo customerTicketInfo=customerViewMapper.getCustomerTicketInfo(ticketID);
+            AirportFlight airportFlight=customerViewMapper.getCustomerFlight(customerTicketInfo.getFlightID());
+        customer.setPoints(customer.getPoints()-50-airportFlight.getPrice()/10);
+
+        }
+    }
 }

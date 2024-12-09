@@ -1,10 +1,11 @@
 package com.example.airline_ticket_system_idea.controller;
 
 import com.example.airline_ticket_system_idea.pojo.AirportFlight;
+import com.example.airline_ticket_system_idea.pojo.CustomerTicketInfo;
 import com.example.airline_ticket_system_idea.pojo.Result;
 import com.example.airline_ticket_system_idea.service.CustomerViewService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,16 @@ public class CustomerViewController {
     public Result<String> orderFlight(@RequestBody AirportFlight airportFlight){
         customerViewService.orderFlight(airportFlight);
         return Result.success("订购成功");
+    }
+    @GetMapping("/billList")
+    public Result<List<CustomerTicketInfo>> getBillList() {
+        List<CustomerTicketInfo> billList = customerViewService.getBillList();
+        return Result.success(billList);
+    }
+    @PutMapping("/billRetreat/{ticketID}")
+    public Result<String> billRetreat( @PathVariable String ticketID){
+        customerViewService.billRetreat(ticketID);
+        return Result.success("退票成功");
     }
 
 }

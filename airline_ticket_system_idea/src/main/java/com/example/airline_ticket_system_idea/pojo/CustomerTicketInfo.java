@@ -23,7 +23,7 @@ private String email;
     private String airportID;;
     private String departureTime;
     private String boardingGate;
-    private String price;
+    private double price;
     private String delay;
     private int seatCount;
 

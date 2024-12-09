@@ -10,3 +10,9 @@ export const flightListService =()=>{
 export const flightOrderService=(data)=>{
     return request.post('/customerView/orderFlight',data)
 }
+export const billListService=()=>{
+    return request.get('/customerView/billList')
+}
+export const billRetreatService=(data)=>{
+    return request.put('customerView/billRetreat')
+}
