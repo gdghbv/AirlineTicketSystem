@@ -27,7 +27,7 @@ public interface AirportViewMapper {
 
 @Update("UPDATE company_flight_info SET delay= '是' WHERE flightID= #{flightID}")
     void delayFlight(String flightID,String delayTime);
-@Select("SELECT * FROM aircraft_info Where airportIDD= #{airportID}")
+@Select("SELECT * FROM airport_aircraft Where airportID= #{airportID}")
    List<AirportAircraft> getAircraftList(String airportID);
 
 @Select("SELECT aircraftType FROM company_aircraft_info WHERE aircraftID= #{aircraftID}")
@@ -35,10 +35,10 @@ public interface AirportViewMapper {
 @Select("SELECT airportName FROM airport_info WHERE airportID= #{airportID}")
     String getAirportName(String airportID);
 
-@Insert("INSERT INTO company_aircraft_info (aircraftID,airportID,status) VALUES ( #{aircraftID},#{airportID},#{status})")
+@Insert("INSERT INTO airport_aircraft (aircraftID,airportID,status) VALUES ( #{aircraftID},#{airportID},#{status})")
     void addAircraft(AirportAircraft airportAircraft);
-@Delete("DELETE FROM company_aircraft_info WHERE aircraftID= #{aircraftID}")
+@Delete("DELETE FROM airport_aircraft WHERE aircraftID= #{aircraftID}")
     void deleteAircraft(String aircraftID);
-@Update("UPDATE company_aircraft_info SET aircraftID= #{aircraftID},airportID= #{airportID},status= #{status}")
+@Update("UPDATE airport_aircraft SET aircraftID= #{aircraftID},airportID= #{airportID},status= #{status}")
     void updateAircraft(AirportAircraft airportAircraft);
 }

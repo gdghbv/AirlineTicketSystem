@@ -20,7 +20,7 @@ public class AirportViewServiceImpl implements AirportViewService {
     @Override
     public List<AirportFlight> getFlightList() {
 //        需要为每个routeID进行赋值
-        Map <String, Object> map = ThreadLocalUtil.get();
+        Map<String, Object> map = ThreadLocalUtil.get();
         String airportID = (String) map.get("airportID");
         List<AirportFlight> flightList = airportViewMapper.getFlightList(airportID);
 
@@ -43,7 +43,7 @@ public class AirportViewServiceImpl implements AirportViewService {
 
     @Override
     public void addFlight(AirportFlight airportFlight) {
-       airportViewMapper.addFlight(airportFlight);
+        airportViewMapper.addFlight(airportFlight);
     }
 
     @Override
@@ -57,16 +57,16 @@ public class AirportViewServiceImpl implements AirportViewService {
     }
 
     @Override
-    public void delayFlight(String flightID,String delayTime) {
-        airportViewMapper.delayFlight(flightID,delayTime);
+    public void delayFlight(String flightID, String delayTime) {
+        airportViewMapper.delayFlight(flightID, delayTime);
     }
 
     @Override
     public List<AirportAircraft> getAircraftList() {
-        Map<String, Object> map=ThreadLocalUtil.get();
-        String airportID=(String) map.get("airportID");
-      List<AirportAircraft>   aircraftList=  airportViewMapper.getAircraftList(airportID);
-        for(AirportAircraft aircraft:aircraftList){
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String airportID = (String) map.get("airportID");
+        List<AirportAircraft> aircraftList = airportViewMapper.getAircraftList(airportID);
+        for (AirportAircraft aircraft : aircraftList) {
             aircraft.setAircraftType(airportViewMapper.getAircraftType(aircraft.getAircraftID()));
             aircraft.setAirportName(airportViewMapper.getAirportName(aircraft.getAirportID()));
         }
@@ -75,6 +75,9 @@ public class AirportViewServiceImpl implements AirportViewService {
 
     @Override
     public void addAircraft(AirportAircraft airportAircraft) {
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String airportId=(String) map.get("airportID");
+      airportAircraft.setAirportID(airportId);
         airportViewMapper.addAircraft(airportAircraft);
     }
 
@@ -85,7 +88,7 @@ public class AirportViewServiceImpl implements AirportViewService {
 
     @Override
     public void updateAircraft(AirportAircraft airportAircraft) {
-        airportViewMapper.updateAircraft( airportAircraft);
+        airportViewMapper.updateAircraft(airportAircraft);
 
     }
 

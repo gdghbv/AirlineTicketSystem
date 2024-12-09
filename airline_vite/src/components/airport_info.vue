@@ -39,7 +39,7 @@
     </div>
 </template>
 
-<script set up>
+<script setup>
 import { ref } from 'vue'
 const dataForm = ref({
   email: ' ',
