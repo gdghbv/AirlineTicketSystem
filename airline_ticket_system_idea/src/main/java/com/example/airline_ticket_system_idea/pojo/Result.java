@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data//lombok生效
+
 public class Result<T> {
     private Integer code;//业务状态码  0-成功  1-失败
     private String msg;//提示信息

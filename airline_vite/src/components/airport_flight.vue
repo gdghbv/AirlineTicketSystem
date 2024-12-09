@@ -3,7 +3,6 @@ import { ref ,} from 'vue';
 
 const title = ref('');
 const dialogVisible = ref(false);
-
 const flight = ref([{
 
 }
@@ -11,31 +10,33 @@ const flight = ref([{
 
 const addFlightData = ref([
     {
-        departureTime: '',
-        departure: '',
-        destination: '',
-        startingAirport: '',
-        destinationAirport: '',
-        nemberSeats: '',
-        aircraftType: '',
-        boardingGate: '',
+       origin: '',
+       destination: '',
+       originAirportID: '',
+       destinationAirportID: '',
+        aircraftID: '',
         flightID: '',
-        price: ''
+        departureTime:'',
+        boardingGate: '',
+        price: '',
+        seats: '',
+        routeID:''
 
     }
 ])
 const clearData = () => {
     addFlightData.value = {
-        departureTime: '',
-        departure: '',
-        destination: '',
-        startingAirport: '',
-        destinationAirport: '',
-        nemberSeats: '',
-        aircraftType: '',
-        boardingGate: '',
+        origin: '',
+       destination: '',
+       originAirportID: '',
+       destinationAirportID: '',
+        aircraftID: '',
         flightID: '',
-        price: ''
+        departureTime:'',
+        boardingGate: '',
+        price: '',
+        seats: '',
+        routeID:''
     }
 }
 
@@ -63,7 +64,7 @@ const updateFlight = async () => {
 import { ElMessageBox } from 'element-plus'
 const flightDelete = async (row) => {
     ElMessageBox.confirm(
-        '你确认要删除该飞机信息吗?',
+        '你确认要删除该航线信息吗?',
         '温馨提示',
         {
             confirmButtonText: '确认',
@@ -113,7 +114,7 @@ const showDialog = (row) => {
             <el-table-column label="目的地" prop="destination"></el-table-column>
             <el-table-column label="出发机场" prop="startingAirport"></el-table-column>
             <el-table-column label="目标机场" prop="destinationAirport"></el-table-column>
-            <el-table-column label="座位数" prop="nemberSeats"></el-table-column>
+            <el-table-column label="座位数" prop="seats"></el-table-column>
             <el-table-column label="机型" prop="aircraftType"></el-table-column>
             <el-table-column label="检票口" prop="boardingGate"></el-table-column>
             <el-table-column label="航班编号" prop="flightID"></el-table-column>
@@ -142,7 +143,7 @@ const showDialog = (row) => {
                 <el-form-item label="目标机场" prop="destinationAirport">
                    <el-input v-model="addFlightData.DestinationAirport" placeholder="请输入目标机场"></el-input>
                 </el-form-item>
-                <el-form-item label="座位数" prop="nemberSeats">
+                <el-form-item label="座位数" prop="seats">
                     <el-input v-model="addFlightData.SeatNumber" placeholder="请输入座位数"></el-input>
                 </el-form-item>
                 <el-form-item label="机型" prop="aircraftType">

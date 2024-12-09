@@ -4,7 +4,7 @@
         <el-col :span="8">
             <div class="grid-content bg-purple">
                  <el-card class="box-card">
-        <div slot="header" class="clearfix">
+        <div class="clearfix">
           <span>机场信息</span>
         </div>
           <div class="name-role">

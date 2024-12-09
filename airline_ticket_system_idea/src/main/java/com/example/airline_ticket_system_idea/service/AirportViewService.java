@@ -1,32 +1,28 @@
 package com.example.airline_ticket_system_idea.service;
 
-import com.example.airline_ticket_system_idea.pojo.Airport;
-import com.example.airline_ticket_system_idea.pojo.AirportFlight;
-import com.example.airline_ticket_system_idea.pojo.CompanyRoutes;
-import com.example.airline_ticket_system_idea.pojo.Customer;
+import com.example.airline_ticket_system_idea.pojo.*;
 
 import java.util.List;
 
 public interface AirportViewService {
-    List<AirportFlight> getFlight(AirportFlight airportFlight);
 
-    AirportFlight getFlightByID(String originAirportID);
+    List<AirportFlight> getFlightList();
+
+
 
     void addFlight(AirportFlight airportFlight);
 
     void updateFlight(AirportFlight airportFlight);
 
-    void deleteFlight(AirportFlight airportFlight);
+    void deleteFlight(String flightID);
 
-    void delayAirport(AirportFlight airportFlight);
+    void delayFlight(String flightID,String delayTime);
 
-    List<Customer> getCustomerList();
+    List<AirportAircraft> getAircraftList();
 
-    void updateCustomer(Customer customer);
+    void addAircraft(AirportAircraft airportAircraft);
 
-    void deleteCustomer(Customer customer);
+    void deleteAircraft(String aircraftID);
 
-    Airport getAirportInfo(String airportID);
-
-    CompanyRoutes getRouteByID(String routeID);
+    void updateAircraft(AirportAircraft airportAircraft);
 }

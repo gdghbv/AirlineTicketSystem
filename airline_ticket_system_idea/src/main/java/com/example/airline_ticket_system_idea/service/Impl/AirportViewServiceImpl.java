@@ -1,10 +1,7 @@
 package com.example.airline_ticket_system_idea.service.Impl;
 
 import com.example.airline_ticket_system_idea.mapper.AirportViewMapper;
-import com.example.airline_ticket_system_idea.pojo.Airport;
-import com.example.airline_ticket_system_idea.pojo.AirportFlight;
-import com.example.airline_ticket_system_idea.pojo.CompanyRoutes;
-import com.example.airline_ticket_system_idea.pojo.Customer;
+import com.example.airline_ticket_system_idea.pojo.*;
 import com.example.airline_ticket_system_idea.service.AirportViewService;
 import com.example.airline_ticket_system_idea.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,29 +16,34 @@ public class AirportViewServiceImpl implements AirportViewService {
     @Autowired
     private AirportViewMapper airportViewMapper;
 
-    @Override
-    public List<AirportFlight> getFlight(AirportFlight airportFlight) {
-        Map<String,Object> map= ThreadLocalUtil.get();
-        String originAirportID=(String) map.get("airportID");
-List<AirportFlight> airportFlights=airportViewMapper.getFlight(originAirportID);
-//根据机场的ID，查询出起始机场和目的机场的名称
-for(AirportFlight flight:airportFlights){
-    String originAirportName=airportViewMapper.getAirportNameByID(flight.getOriginAirportID());
-    String destinationAirportName=airportViewMapper.getAirportNameByID(flight.getDestinationAirportID());
-    flight.setOriginAirportName(originAirportName);
-    flight.setDestinationAirportName(destinationAirportName);
-}
-return airportFlights;
-    }
 
     @Override
-    public AirportFlight getFlightByID(String flightID) {
-        return airportViewMapper.getFlightByID(flightID);
+    public List<AirportFlight> getFlightList() {
+//        需要为每个routeID进行赋值
+        Map <String, Object> map = ThreadLocalUtil.get();
+        String airportID = (String) map.get("airportID");
+        List<AirportFlight> flightList = airportViewMapper.getFlightList(airportID);
+
+        for (AirportFlight flight : flightList) {
+            String routeId = flight.getRouteID();
+            //
+            CompanyRoutes companyRoute = airportViewMapper.getCompanyRoute(routeId);
+            if (companyRoute != null) {
+                //编辑返回的数据，添加详细的航线消息
+                flight.setOrigin(companyRoute.getOrigin());
+                flight.setDestination(companyRoute.getDestination());
+                flight.setOriginAirport(companyRoute.getOriginAirport());
+                flight.setDestinationAirport(companyRoute.getDestinationAirport());
+                flight.setCompanyID(companyRoute.getCompanyID());
+                flight.setAircraftID(companyRoute.getAircraftID());
+            }
+        }
+        return flightList;
     }
 
     @Override
     public void addFlight(AirportFlight airportFlight) {
-        airportViewMapper.addFlight(airportFlight);
+       airportViewMapper.addFlight(airportFlight);
     }
 
     @Override
@@ -50,37 +52,43 @@ return airportFlights;
     }
 
     @Override
-    public void deleteFlight(AirportFlight airportFlight) {
-        airportViewMapper.deleteFlight(airportFlight);
+    public void deleteFlight(String flightID) {
+        airportViewMapper.deleteFlight(flightID);
     }
 
     @Override
-    public void delayAirport(AirportFlight airportFlight) {
-        airportViewMapper.delayAirport(airportFlight);
+    public void delayFlight(String flightID,String delayTime) {
+        airportViewMapper.delayFlight(flightID,delayTime);
     }
 
     @Override
-    public List<Customer> getCustomerList() {
-        return airportViewMapper.getCustomerList();
+    public List<AirportAircraft> getAircraftList() {
+        Map<String, Object> map=ThreadLocalUtil.get();
+        String airportID=(String) map.get("airportID");
+      List<AirportAircraft>   aircraftList=  airportViewMapper.getAircraftList(airportID);
+        for(AirportAircraft aircraft:aircraftList){
+            aircraft.setAircraftType(airportViewMapper.getAircraftType(aircraft.getAircraftID()));
+            aircraft.setAirportName(airportViewMapper.getAirportName(aircraft.getAirportID()));
+        }
+        return aircraftList;
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
-        airportViewMapper.updateCustomer(customer);
+    public void addAircraft(AirportAircraft airportAircraft) {
+        airportViewMapper.addAircraft(airportAircraft);
     }
 
     @Override
-    public void deleteCustomer(Customer customer) {
-        airportViewMapper.deleteCustomer(customer);
+    public void deleteAircraft(String aircraftID) {
+        airportViewMapper.deleteAircraft(aircraftID);
     }
 
     @Override
-    public Airport getAirportInfo(String airportID) {
-        return airportViewMapper.getAirportInfoByID(airportID);
+    public void updateAircraft(AirportAircraft airportAircraft) {
+        airportViewMapper.updateAircraft( airportAircraft);
+
     }
 
-    @Override
-    public CompanyRoutes getRouteByID(String routeID) {
-        return airportViewMapper.getRouteByID(routeID);
-    }
+
 }
+

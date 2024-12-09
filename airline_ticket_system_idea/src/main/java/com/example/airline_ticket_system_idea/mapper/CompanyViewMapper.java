@@ -30,7 +30,7 @@ public interface CompanyViewMapper {
     @Select("SELECT * FROM company_routes_info WHERE routeID = #{routeID}")
     CompanyRoutes findRoutesByID(String routeID);
 
-    @Insert("INSERT INTO company_routes_info(aircraftID, routeID, origin, destination, originAirport, destinationAirport,companyID) VALUES(#{aircraftID}, #{routeID}, #{origin}, #{destination}, #{originAirport}, #{destinationAirport}, #{companyID})")
+    @Insert("INSERT INTO company_routes_info(routeID, origin, destination, originAirport, destinationAirport,companyID) VALUES( #{routeID}, #{origin}, #{destination}, #{originAirport}, #{destinationAirport}, #{companyID})")
     void addRoutes(CompanyRoutes companyRoutes);
 
     @Delete("DELETE FROM company_routes_info WHERE routeID = #{routeID}")
