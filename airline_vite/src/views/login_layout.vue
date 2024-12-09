@@ -54,6 +54,7 @@ const login = async () => {
     switch (userData.value.role) {
       case "1":
         result = await customerLoginService(userData.value);
+        router.push('/customer')
         break;
       case "2":
         result = await companyLoginService(userData.value);

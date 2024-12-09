@@ -8,4 +8,6 @@ import java.util.List;
 public interface CustomerViewService {
 
     List<AirportFlight> getFlightList();
+
+    void orderFlight(AirportFlight airportFlight);
 }

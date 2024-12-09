@@ -2,95 +2,54 @@
 import { ref, } from 'vue';
 const title = ref('');
 const dialogVisible = ref(false);
-const delayVisible = ref(false);
 const flightData = ref([{
-    origin: '北京',
-    destination: '上海',
-    originAirport: '北京机场',
-    destinationAirport: '上海机场',
-    originAirport: '北京',
-    companyID: '1',
-    flightID: '1',
-    airportID: '1',
-    departureTime: '2022-01-01 08:00:00',
-    boardingGate: 'A1',
-    price: '1000',
+    origin:'',
+    destination:'',
+    originAirport:'',
+    destinationAirport:'',
+    departureTime:'',
+    boardingGate:'',
+    price:'',
+    seatCount:'',
 }
 ]);
-const addFlightData = ref({
-    routeID: '',
+const addTicketData = ref({
+  
     flightID: '',
-    departureTime: '',
-    boardingGate: '',
-    price: '',
-    delay: '',
-    companyID: '',
+    date:'',
+    origin:'',
+    destination:'',
+    originAirport:'',
+    destinationAirport:'',
+    departureTime:'',
+    boardingGate:'',
+    price:'',
+    seatCount:'',
+   citizenID:'',
 }
 )
-const clearData = () => {
-    addFlightData.value = {
-        routeID: '',
-        flightID: '',
-        departureTime: '',
-        boardingGate: '',
-        price: '',
-        delay: '',
-        companyID: '',
-    }
-}
+
 const showDialog = (row) => {
     dialogVisible.value = true;
     title.value = '确认购买';
-    addFlightData.value = row;
+    addTicketData.value = row;
+    console.log("showDialog中的"+addTicketData.value);
+    
 }
 
-import { } from '@/api/airport_view'
+import {flightListService ,flightOrderService } from '@/api/customer_view'
 const flightList = async () => {
-    let result = await flightListService();
-    flightData.value = result.data;
-
+  let result = await flightListService();  // 请求后端的 /customerView/flightList
+  flightData.value = result.data;
 }
 flightList();
-import { ElMessage } from 'element-plus'
-const addFlight = async () => {
-    let result = await flightAddService(addFlightData.value);
-    ElMessage.success(result.msg ? result.msg : '添加成功');
+import { ElMessage } from 'element-plus';
+const flightOrder=async()=>{
+    console.log("flightOrder中的"+addTicketData.value);
+    let result=await flightOrderService(addTicketData.value);
+    ElMessage.success( '购买成功');
     dialogVisible.value = false;
     flightList();
-}
-const updateFlight = async () => {
-    let result = await flightUpdateService(addFlightData.value);
-    ElMessage.success(result.msg ? result.msg : '修改成功');
-    dialogVisible.value = false;
-    flightList();
-}
-import { ElMessageBox } from 'element-plus'
-const flightDelete = async (row) => {
-    ElMessageBox.confirm(
-        '你确认要删除该航班信息吗?',
-        '温馨提示',
-        {
-            confirmButtonText: '确认',
-            cancelButtonText: '取消',
-            type: 'warning',
-        }
-    )
-        .then(async () => {
-            //调用接口
-            let result = await flightDeleteService(row.flightID);
-            ElMessage({
-                type: 'success',
-                message: '删除成功',
-            })
-            //刷新列表
-            flightList();
-        })
-        .catch(() => {
-            ElMessage({
-                type: 'info',
-                message: '用户取消了删除',
-            })
-        })
 }
 </script>
 
@@ -98,11 +57,8 @@ const flightDelete = async (row) => {
     <el-card class="page-container">
         <template #header>
             <div class="header">
-                <span>机场航班信息</span>
-                <div class="extra">
-                    <el-button type="primary"
-                        @click="dialogVisible = true; title = '添加航班'; clearData()">添加航班</el-button>
-                </div>
+                <span>购买机票</span>
+                
             </div>
         </template>
         <el-table :data="flightData" style="width: 100%">
@@ -117,42 +73,28 @@ const flightDelete = async (row) => {
             <el-table-column label="起飞时间" prop="departureTime"></el-table-column>
             <el-table-column label="检票口" prop="boardingGate"></el-table-column>
             <el-table-column label="价格" prop="price"></el-table-column>
+            <el-table-column label="剩余座位" prop="seatCount"></el-table-column>
 
             <el-table-column label="操作" width="150px">
                 <template #default="{ row }">
                  
-                    <el-button :icon="confirm" circle plain type="primary" @click="showDelayDialog(row)">购买</el-button>
+                    <el-button :icon="confirm" circle plain type="primary" @click="showDialog(row)">购买</el-button>
                 </template>
             </el-table-column>
         </el-table>
-        <!-- 确认购买弹窗 -->
+        <!-- 确认购买信息弹窗 -->
         <el-dialog v-model="dialogVisible" :title="title" width="30%">
-            <el-form :model="addFlightData" lable-width="100px" style="padding-right: 30px;">
-                <el-form-item label="航线ID" prop="routeID">
-                    <el-input v-model="addFlightData.routeID" placeholder="请输入航线ID"></el-input>
-                </el-form-item>
-                <el-form-item label="航班ID" prop="flightID">
-                    <el-input v-model="addFlightData.flightID" placeholder="请输入航班ID"></el-input>
-                </el-form-item>
-                <el-form-item label="起飞时间" prop="departureTime">
-                    <el-input v-model="addFlightData.departureTime" placeholder="请输入起飞时间"></el-input>
-                </el-form-item>
-                <el-form-item label="检票口" prop="boardingGate">
-                    <el-input v-model="addFlightData.boardingGate" placeholder="请输入检票口"></el-input>
-                </el-form-item>
-                <el-form-item label="价格" prop="price">
-                    <el-input v-model="addFlightData.price" placeholder="请输入价格"></el-input>
-                </el-form-item>
-                <el-form-item label="机场ID" prop="airportID">
-                    <el-input v-model="addFlightData.airportID" placeholder="请输入机场ID"></el-input>
-                </el-form-item>
-                <el-form-item label="是否延误" prop="delay">
-                    <el-input v-model="addFlightData.delay" placeholder="请输入是否延误"></el-input>
-                </el-form-item>
+            <el-form :model="addTicketData" lable-width="100px" style="padding-right: 30px;">
+              <el-form-item>
+                <el-input v-model="addTicketData.citizenID" placeholder="请输入出行人的身份证号"></el-input>
+              </el-form-item>
+              
+                是否确认购买此机票？
+              
             </el-form>
             <template #footer>
                 <span class="dialog-footer">
-                    <el-button type="primary" @click="title == '添加航班' ? addFlight() : updateFlight()"> 确 定</el-button>
+                    <el-button type="primary" @click="flightOrder()"> 确 定</el-button>
                     <el-button @click="dialogVisible = false"> 取 消</el-button>
                 </span>
             </template>

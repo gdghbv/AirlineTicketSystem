@@ -2,11 +2,12 @@ package com.example.airline_ticket_system_idea.pojo;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
 public class CustomerTicketInfo {
-private Date dateTime;
+private LocalDateTime dateTime;
 private String status;
 private String flightID;
 private String email;

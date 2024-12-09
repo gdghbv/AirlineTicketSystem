@@ -10,8 +10,10 @@ import airport_flight from "@/components/airport_flight.vue";
 import airport_customer from "@/components/airport_customer.vue";
 import airport_aircraft from "@/components/airport_aircraft.vue";
 import airport_info from "@/components/airport_info.vue";
-import Customer_layout from "@/views/customer_layout.vue";
-import Customer_bill from "@/components/customer_bill.vue";
+import customer_layout from "@/views/customer_layout.vue";
+import customer_bill from "@/components/customer_bill.vue";
+import customer_info from "@/components/customer_info.vue";
+import customer_ticket from "@/components/customer_ticket.vue";
 
 //定义路由关系
 const routes =[
@@ -31,12 +33,12 @@ const routes =[
         {path:'/airport/customer',component:airport_customer},
         {path:'/airport/aircraft',component:airport_aircraft},
     ]}, 
-     {path: '/customer', component: Customer_layout,
+     {path: '/customer', component: customer_layout,
         redirect: '/customer/bill',
         children:[
-        {path:'/customer/bill',component:Customer_bill},
-        {path:'/customer/ticket',component:airport_flight},
-        {path:'/customer/info',component:airport_customer},
+        {path:'/customer/bill',component:customer_bill},
+        {path:'/customer/ticket',component:customer_ticket},
+        {path:'/customer/info',component:customer_info},
         
     ]}
 ]

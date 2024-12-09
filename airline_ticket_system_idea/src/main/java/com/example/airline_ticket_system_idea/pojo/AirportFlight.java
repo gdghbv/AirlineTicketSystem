@@ -2,6 +2,9 @@ package com.example.airline_ticket_system_idea.pojo;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Data
 public class AirportFlight {
   //  这是航线相关信息
@@ -17,8 +20,12 @@ public class AirportFlight {
     private String airportID;;
     private String departureTime;
     private String boardingGate;
-    private String price;
+    private double price;
     private String delay;
     private int seatCount;
+//    为了适配customer的订购信息，新添加的信息
+  private LocalDateTime dateTime;
+  private String status;
+  private String email;
 
 }

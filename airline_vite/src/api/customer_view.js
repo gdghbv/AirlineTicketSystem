@@ -1,12 +1,12 @@
 import request from '@/utils/request'
 import { useTokenStore } from '@/stores/token'
 
-export const FlightListService =()=>{
+export const flightListService =()=>{
     const tokenStore = useTokenStore()
     // return request.get('/companyView/aircraftList',{headers: {'Authorization': tokenStore.token}})
     //因为在request。js中设置了默认的headers，所以这里可以不用设置headers
-    return request.get('/companyView/aircraftList')
+    return request.get('/customerView/flightList')
 }
-export const FlightOrderService=(flightID)=>{
-    return request.post('/customerView/orderFlight')
+export const flightOrderService=(data)=>{
+    return request.post('/customerView/orderFlight',data)
 }
