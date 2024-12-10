@@ -16,3 +16,13 @@ export const billListService=()=>{
 export const billRetreatService=(data)=>{
     return request.put('customerView/billRetreat')
 }
+
+export const customerInfoService=()=>{
+    return request.get('/customerView/customerInfo')
+}
+
+export const updataCustomerInfoService=(data)=>{
+    return request.put('/customerView/updateCustomerInfo',data)
+}
+
+
