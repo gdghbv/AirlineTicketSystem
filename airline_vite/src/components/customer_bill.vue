@@ -40,6 +40,7 @@ const showDialog = (row) => {
 import {billListService ,billRetreatService } from '@/api/customer_view'
 const billList = async () => {
   let result = await billListService();  
+  console.log("billList中的"+result.data);
   billData.value = result.data;
 }
 billList();
@@ -61,8 +62,9 @@ const billRetreat=async()=>{
                 
             </div>
         </template>
-        <el-table :data="flightData" style="width: 100%">
+        <el-table :data="billData" style="width: 100%">
             <el-table-column label="序号" type="index"></el-table-column>
+           <el-table-column label="购买时间" prop="dateTime"></el-table-column>
             <el-table-column label="始发地" prop="origin"></el-table-column>
             <el-table-column label="目的地" prop="destination"></el-table-column>
             <el-table-column label="起飞机场" prop="originAirport"></el-table-column>
