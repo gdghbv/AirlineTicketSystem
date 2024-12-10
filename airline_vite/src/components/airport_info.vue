@@ -99,15 +99,13 @@
   
   <script setup>
 
-const showDialog = (row) => {
-    dialogVisible.value = true;
-    title.value = '编辑信息';
-    airportData.value = row;
-}
+
 
 
 const dialogVisible = ref(false);
 const title = ref('');
+
+
 
 
 const airportData = ref({
@@ -130,6 +128,13 @@ const updataAirportData = ref([
         email: '',
     }
 ])
+
+const showDialog = (row) => {
+    dialogVisible.value = true;
+    title.value = '编辑信息';
+    airportData.value = { ...row };
+}
+
 
 // import { airportInfoService, updataAirportInfoService } from '@/service/airport_info_service'
 // const airportInfo = async () => {
