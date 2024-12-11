@@ -101,9 +101,6 @@ const aircraftDelete = async (row) => {
             <el-table-column label="机场名字" prop="airportName"></el-table-column>
             <el-table-column label="所属公司ID" prop="companyID"></el-table-column>
             <el-table-column label="状态" prop="status"></el-table-column>
-
-
-
             <el-table-column label="操作">
                 <template #default="{ row }">
                     <el-button :icon="Edit" circle plain type="primary" @click="showDialog(row)">编辑</el-button>
@@ -111,6 +108,8 @@ const aircraftDelete = async (row) => {
                 </template>
             </el-table-column>
         </el-table>
+        
+        
         <el-dialog v-model="dialogVisible" :title="title" width="30%">
             <el-form :model="addAircraftData" lable-width="100px" style="padding-right: 30px;">
                 <el-form-item label="飞机ID" prop="aircraftID">

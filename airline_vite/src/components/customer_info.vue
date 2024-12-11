@@ -9,7 +9,7 @@
       border
     >
       <template #extra>
-        <el-button type="primary" @click="showDialog(row)">编辑</el-button>
+        <el-button type="primary" @click="showDialog()">编辑</el-button>
       </template>
       <el-descriptions-item>
         <template #label>
@@ -110,10 +110,10 @@
   
   <script setup>
 
-const showDialog = (row) => {
+const showDialog = () => {
     dialogVisible.value = true;
     title.value = '编辑信息';
-    customerData.value = { ...row };
+    updataCustomerData.value = customerData.value;
 }
 
 

@@ -132,7 +132,7 @@ const updataAirportData = ref([
 const showDialog = (row) => {
     dialogVisible.value = true;
     title.value = '编辑信息';
-    airportData.value = { ...row };
+    updataAirportData.value = airportData.value;
 }
 
 

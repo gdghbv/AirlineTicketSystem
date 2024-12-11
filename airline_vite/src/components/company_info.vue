@@ -102,7 +102,7 @@
 const showDialog = (row) => {
     dialogVisible.value = true;
     title.value = '编辑信息';
-    companyData.value = {...row};
+    updataCompanyData.value = companyData.value;
 }
 
 

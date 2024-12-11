@@ -2,10 +2,15 @@
     <div class="common-layout">
       <el-container class="layout-container">
         <el-header>机场菜单</el-header>
+        <img src="https://pic.imgdb.cn/item/6759079bd0e0a243d4e1a68d.png">
         <el-container>
           <el-aside width="200px">
             <div class="el-aside__logo"></div>
             <!-- element-plus的菜单标签 -->
+            <el-empty 
+            image="https://pic.imgdb.cn/item/675907ead0e0a243d4e1a6b6.gif"
+            description=" "
+            ></el-empty>
             <el-menu active-text-color="#ffd04b" background-color="#232323" text-color="#fff" router>
               <el-menu-item index="/airport/flight">
                 <el-icon>
