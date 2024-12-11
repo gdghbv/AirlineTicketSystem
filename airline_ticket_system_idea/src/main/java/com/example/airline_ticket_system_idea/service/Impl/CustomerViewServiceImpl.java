@@ -64,8 +64,22 @@ String routeId=airportFlight.getRouteID();
         String email=(String)map.get("email");
         List<CustomerTicketInfo> customerTicketInfos=customerViewMapper.getBillList(email);
         for(CustomerTicketInfo customerTicketInfo:customerTicketInfos){
+
             String flightID=customerTicketInfo.getFlightID();
             AirportFlight airportFlight=customerViewMapper.getCustomerFlight(flightID);
+
+            String routeId = airportFlight.getRouteID();
+            //
+            CompanyRoutes companyRoute = customerViewMapper.getCompanyRoute(routeId);
+            if (companyRoute != null) {
+                //编辑返回的数据，添加详细的航线消息
+                airportFlight.setOrigin(companyRoute.getOrigin());
+                airportFlight.setDestination(companyRoute.getDestination());
+                airportFlight.setOriginAirport(companyRoute.getOriginAirport());
+                airportFlight.setDestinationAirport(companyRoute.getDestinationAirport());
+                airportFlight.setCompanyID(companyRoute.getCompanyID());
+                airportFlight.setAircraftID(companyRoute.getAircraftID());
+            }
             customerTicketInfo.setOrigin(airportFlight.getOrigin());
             customerTicketInfo.setDestination(airportFlight.getDestination());
             customerTicketInfo.setDepartureTime(airportFlight.getDepartureTime());

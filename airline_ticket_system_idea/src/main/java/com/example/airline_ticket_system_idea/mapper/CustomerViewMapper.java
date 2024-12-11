@@ -40,4 +40,6 @@ public interface CustomerViewMapper {
     void billRetreat(String ticketID);
 @Select("SELECT * FROM customer_ticket_info WHERE ticketID = #{ticketID}")
     CustomerTicketInfo getCustomerTicketInfo(String ticketID);
+@Select("SELECT * FROM company_routes_info WHERE routeID = #{routeID}")
+    CompanyRoutes getCompanyRoute(String routeId);
 }
