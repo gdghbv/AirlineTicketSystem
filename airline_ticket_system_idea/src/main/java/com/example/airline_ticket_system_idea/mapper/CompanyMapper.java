@@ -12,6 +12,5 @@ public interface CompanyMapper {
     @Insert("INSERT INTO company_info (companyID,email,password)"+"Values(#{companyID},#{email},#{password})")
     void add(@Param("companyID") String companyID, @Param("email") String email, @Param("password") String password);
 
-    @Update("UPDATE company_info SET companyID = #{companyID}, companyName= #{companyName},companyAddress = #{companyAddress}, phone = #{phone} WHERE email = #{email}")
-    void update(Company company);
+
 }

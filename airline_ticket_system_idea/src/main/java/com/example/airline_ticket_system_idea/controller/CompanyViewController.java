@@ -6,6 +6,7 @@ import com.example.airline_ticket_system_idea.pojo.CompanyRoutes;
 import com.example.airline_ticket_system_idea.pojo.Result;
 import com.example.airline_ticket_system_idea.service.CompanyViewService;
 import com.example.airline_ticket_system_idea.util.JwtUtil;
+import com.example.airline_ticket_system_idea.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,6 +65,21 @@ return Result.success(companyRoutes);
     public Result<String> deleteRoutes(@PathVariable("routeId") String routeID){
 companyViewService.deleteRoutes(routeID);
 return Result.success("删除成功");
+    }
+    @GetMapping("/companyInfo")
+    public Result<Company> companyInfo(){
+//        Map<String, Object> map = JwtUtil.parseToken(token);
+//        String email = (String) map.get("email");
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String email = (String) map.get("email");
+        Company company = companyViewService.findCompanyByEmail(email);
+        return Result.success(company);
+    }
+    @PutMapping("/updateCompanyInfo")
+    public Result update(@RequestBody Company company){
+
+        companyViewService.update(company);
+        return Result.success();
     }
     }
 

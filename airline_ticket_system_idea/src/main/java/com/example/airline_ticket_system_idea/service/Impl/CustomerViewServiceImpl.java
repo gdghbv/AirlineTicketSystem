@@ -21,18 +21,19 @@ public class CustomerViewServiceImpl implements CustomerViewService {
     @Override
     public List<AirportFlight> getFlightList() {
         List<AirportFlight> airportFlights = customerViewMapper.getFlightList();
-        for(AirportFlight airportFlight: airportFlights){
-String routeId=airportFlight.getRouteID();
-            CompanyRoutes companyRoutes=customerViewMapper.getCompanyRoutes(routeId);
-
-                airportFlight.setOrigin(companyRoutes.getOrigin());
-                airportFlight.setDestination(companyRoutes.getDestination());
-                airportFlight.setOriginAirport(companyRoutes.getOriginAirport());
-                airportFlight.setDestinationAirport(companyRoutes.getDestinationAirport());
-                airportFlight.setCompanyID(companyRoutes.getCompanyID());
-                airportFlight.setAircraftID(companyRoutes.getAircraftID());
-
-        }
+//        使用了链接查询，就不需要下面这些麻烦步骤了
+//        for(AirportFlight airportFlight: airportFlights){
+//String routeId=airportFlight.getRouteID();
+//            CompanyRoutes companyRoutes=customerViewMapper.getCompanyRoutes(routeId);
+//
+//                airportFlight.setOrigin(companyRoutes.getOrigin());
+//                airportFlight.setDestination(companyRoutes.getDestination());
+//                airportFlight.setOriginAirport(companyRoutes.getOriginAirport());
+//                airportFlight.setDestinationAirport(companyRoutes.getDestinationAirport());
+//                airportFlight.setCompanyID(companyRoutes.getCompanyID());
+//                airportFlight.setAircraftID(companyRoutes.getAircraftID());
+//
+//        }
         return airportFlights;
     }
 
@@ -63,32 +64,7 @@ String routeId=airportFlight.getRouteID();
         Map<String ,Object> map=ThreadLocalUtil.get();
         String email=(String)map.get("email");
         List<CustomerTicketInfo> customerTicketInfos=customerViewMapper.getBillList(email);
-        for(CustomerTicketInfo customerTicketInfo:customerTicketInfos){
 
-            String flightID=customerTicketInfo.getFlightID();
-            AirportFlight airportFlight=customerViewMapper.getCustomerFlight(flightID);
-
-            String routeId = airportFlight.getRouteID();
-            //
-            CompanyRoutes companyRoute = customerViewMapper.getCompanyRoute(routeId);
-            if (companyRoute != null) {
-                //编辑返回的数据，添加详细的航线消息
-                airportFlight.setOrigin(companyRoute.getOrigin());
-                airportFlight.setDestination(companyRoute.getDestination());
-                airportFlight.setOriginAirport(companyRoute.getOriginAirport());
-                airportFlight.setDestinationAirport(companyRoute.getDestinationAirport());
-                airportFlight.setCompanyID(companyRoute.getCompanyID());
-                airportFlight.setAircraftID(companyRoute.getAircraftID());
-            }
-            customerTicketInfo.setOrigin(airportFlight.getOrigin());
-            customerTicketInfo.setDestination(airportFlight.getDestination());
-            customerTicketInfo.setDepartureTime(airportFlight.getDepartureTime());
-            customerTicketInfo.setBoardingGate(airportFlight.getBoardingGate());
-            customerTicketInfo.setPrice(airportFlight.getPrice());
-            customerTicketInfo.setOriginAirport(airportFlight.getOriginAirport());
-            customerTicketInfo.setDestinationAirport(airportFlight.getDestinationAirport());
-            customerTicketInfo.setAircraftID(airportFlight.getAircraftID());
-        }
 
         return customerTicketInfos;
     }
@@ -100,12 +76,27 @@ String routeId=airportFlight.getRouteID();
         String email=(String) map.get("email");
         Customer customer=customerViewMapper.getCustomerInfo(email);
         customerViewMapper.billRetreat(ticketID);
-        //对于turbojet的退票，扣除相应的积分并额外扣除50积分
+        //对于customer的退票，扣除相应的积分并额外扣除50积分
         if(customer.getPhone()!=null){
             CustomerTicketInfo customerTicketInfo=customerViewMapper.getCustomerTicketInfo(ticketID);
             AirportFlight airportFlight=customerViewMapper.getCustomerFlight(customerTicketInfo.getFlightID());
         customer.setPoints(customer.getPoints()-50-airportFlight.getPrice()/10);
 
         }
+    }
+
+    @Override
+    public Customer customerInfo() {
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String eamil=(String) map.get("email");
+       return customerViewMapper.getCustomerInfo(eamil);
+    }
+
+    @Override
+    public void updateCustomerInfo(Customer customer) {
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String email=(String) map.get("email");
+        customer.setEmail(email);
+        customerViewMapper.updateCustomerInfo(customer);
     }
 }

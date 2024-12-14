@@ -10,5 +10,5 @@ public interface CompanyService {
 
      void register(String companyID,String email,String password);
 
-    void update(Company company);
+
 }

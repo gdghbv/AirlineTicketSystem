@@ -22,7 +22,9 @@ public class AirportFlight {
     private String boardingGate;
     private double price;
     private String delay;
-    private int seatCount;
+    private int seatCount;// 剩余座位数
+    private int totalSeatCount;// 总座位数
+    private double fullSeatRate;// 满座率
 //    为了适配customer的订购信息，新添加的信息
   private LocalDateTime dateTime;
   private String status;

@@ -1,6 +1,7 @@
 package com.example.airline_ticket_system_idea.service.Impl;
 
 import com.example.airline_ticket_system_idea.mapper.CompanyViewMapper;
+import com.example.airline_ticket_system_idea.pojo.Company;
 import com.example.airline_ticket_system_idea.pojo.CompanyAircraft;
 import com.example.airline_ticket_system_idea.pojo.CompanyRoutes;
 import com.example.airline_ticket_system_idea.service.CompanyViewService;
@@ -17,6 +18,8 @@ public class CompanyViewServiceImpl implements CompanyViewService {
     private CompanyViewMapper companyViewMapper;
 
 
+
+//展示公司飞机
     @Override
     public List<CompanyAircraft> list() {
         Map<String, Object> map = ThreadLocalUtil.get();
@@ -46,6 +49,8 @@ public class CompanyViewServiceImpl implements CompanyViewService {
         companyViewMapper.deleteAircraft(aircraftId);
     }
 
+
+//    公司航线
     @Override
     public List<CompanyRoutes> routesList() {
        Map<String,Object> map=ThreadLocalUtil.get();
@@ -71,6 +76,17 @@ companyViewMapper.addRoutes(companyRoutes);
     @Override
     public void deleteRoutes(String routeID) {
 companyViewMapper.deleteRoutes(routeID);
+    }
+
+// 查找公司用户信息和更新
+    @Override
+    public Company findCompanyByEmail(String email) {
+        return companyViewMapper.findCompanyByEmail( email);
+    }
+
+    @Override
+    public void update(Company company) {
+        companyViewMapper.update(company);
     }
 
 }

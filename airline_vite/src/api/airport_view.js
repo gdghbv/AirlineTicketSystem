@@ -45,7 +45,7 @@ export const airportInfoService =()=>{
     return request.get('/airportView/airportInfo')
 }
 
-export const updataAirportInfoService=(data)=>{
+export const updateAirportInfoService=(data)=>{
     return request.put('/airportView/updateAirportInfo',data)
 }
 

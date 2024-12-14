@@ -29,7 +29,7 @@ export const routesUpdateService = (data)=>{
 }
 
 
-export const updataCompanyInfoService=(data)=>{
+export const updateCompanyInfoService=(data)=>{
     return request.put('/companyView/updateCompanyInfo',data)
 }
 export const companyInfoService=()=>{

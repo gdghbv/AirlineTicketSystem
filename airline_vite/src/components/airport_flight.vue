@@ -129,6 +129,8 @@ const flightDelete = async (row) => {
             <el-table-column label="检票口" prop="boardingGate"></el-table-column>
             <el-table-column label="价格" prop="price"></el-table-column>
             <el-table-column label="剩余座位" prop="seatCount"></el-table-column>
+            <el-table-column label="总座位" prop="totalSeatCount"></el-table-column>
+            <el-table-column lable="满座率" prop="fullSeatRate"></el-table-column>
             <el-table-column label="是否延误" prop="delay"></el-table-column>
 
 

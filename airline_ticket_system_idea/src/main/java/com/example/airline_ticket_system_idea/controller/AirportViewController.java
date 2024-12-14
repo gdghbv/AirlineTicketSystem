@@ -1,16 +1,15 @@
 package com.example.airline_ticket_system_idea.controller;
 
 
-import com.example.airline_ticket_system_idea.pojo.AirportAircraft;
-import com.example.airline_ticket_system_idea.pojo.AirportFlight;
-import com.example.airline_ticket_system_idea.pojo.Customer;
-import com.example.airline_ticket_system_idea.pojo.Result;
+import com.example.airline_ticket_system_idea.pojo.*;
 import com.example.airline_ticket_system_idea.service.AirportViewService;
+import com.example.airline_ticket_system_idea.util.ThreadLocalUtil;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -87,6 +86,22 @@ public class AirportViewController {
         return Result.success("更新成功");
 
 }
+
+    @GetMapping("/airportInfo")
+    public Result<Airport> companyInfo(){
+//
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String email = (String) map.get("email");
+        Airport airport = airportViewService.findAirportByEmail(email);
+        return Result.success(airport);
+    }
+    @PutMapping("/updateAirportInfo")
+    public Result update(@RequestBody Airport airport){
+
+        airportViewService.update(airport);
+        return Result.success();
+    }
+
 }
 
 

@@ -21,7 +21,7 @@ export const customerInfoService=()=>{
     return request.get('/customerView/customerInfo')
 }
 
-export const updataCustomerInfoService=(data)=>{
+export const updateCustomerInfoService=(data)=>{
     return request.put('/customerView/updateCustomerInfo',data)
 }
 

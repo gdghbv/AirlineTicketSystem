@@ -31,4 +31,8 @@ public interface AirportViewService {
     void deleteCustomer(String email);
 
     void updateCustomer(Customer customer);
+
+    Airport findAirportByEmail(String email);
+
+    void update(Airport airport);
 }

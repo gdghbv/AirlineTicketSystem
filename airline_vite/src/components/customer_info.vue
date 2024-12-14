@@ -5,7 +5,7 @@
       class="margin-top"
       title="个人信息界面"
       :column="3"
-      :size="default"
+   
       border
     >
       <template #extra>
@@ -85,21 +85,21 @@
     <el-dialog v-model="dialogVisible" :title="title" width="30%">
         <el-form :model="customerData" lable-width="100px" style="padding-right: 30px;">
             <el-form-item label="昵称" prop="name">
-                <el-input v-model="updataCustomerData.name" placeholder="请输入昵称"></el-input>
+                <el-input v-model="updateCustomerData.name" placeholder="请输入昵称"></el-input>
             </el-form-item>
             <el-form-item label="电话" prop="phone">
-                <el-input v-model="updataCustomerData.phone" placeholder="请输入电话"></el-input>
+                <el-input v-model="updateCustomerData.phone" placeholder="请输入电话"></el-input>
             </el-form-item>
             <el-form-item label="性别" prop="gender">
-                <el-input v-model="updataCustomerData.gender" placeholder="请输入性别"></el-input>
+                <el-input v-model="updateCustomerData.gender" placeholder="请输入性别"></el-input>
             </el-form-item>
             <el-form-item label="邮箱" prop="email">
-                <el-input v-model="updataCustomerData.email" placeholder="请输入邮箱"></el-input>
+                <el-input v-model="updateCustomerData.email" placeholder="请输入邮箱"></el-input>
             </el-form-item>
         </el-form>
         <template #footer>
             <span class="dialog-footer">
-                <el-button type="primary" @click="updataCustomer()"> 确 定</el-button>
+                <el-button type="primary" @click="updateCustomer()"> 确 定</el-button>
                 <el-button @click="dialogVisible = false"> 取 消</el-button>
             </span>
         </template>
@@ -113,7 +113,7 @@
 const showDialog = () => {
     dialogVisible.value = true;
     title.value = '编辑信息';
-    updataCustomerData.value = customerData.value;
+    updateCustomerData.value = customerData.value;
 }
 
 
@@ -134,7 +134,7 @@ const customerData = ref({
 }
 );
 
-const updataCustomerData = ref([
+const updateCustomerData = ref([
     {
       name: '',
       phone: '',
@@ -144,20 +144,20 @@ const updataCustomerData = ref([
     }
 ])
 
-// import { customerInfoService, updataCustomerInfoService } from '@/api/customer_view';
-// const customerInfo = async () => {
-//     let result = await customerInfoService();
-//     customerData.value = result.data;
+import { customerInfoService, updateCustomerInfoService } from '@/api/customer_view';
+const customerInfo = async () => {
+    let result = await customerInfoService();
+    customerData.value = result.data;
 
-// }
-// customerInfo();
-// import { ElMessage } from 'element-plus'
-// const updataCustomer = async () => {
-//     let result = await updataCustomerInfoService(customerData.value);
-//     ElMessage.success(result.msg ? result.msg : '修改成功');
-//     dialogVisible.value = false;
-//     customerInfo();
-// }
+}
+customerInfo();
+import { ElMessage } from 'element-plus'
+const updateCustomer = async () => {
+    let result = await updateCustomerInfoService(updateCustomerData.value);
+    ElMessage.success(result.msg ? result.msg : '修改成功');
+    dialogVisible.value = false;
+    customerInfo();
+}
 
 
   import { computed, ref } from 'vue'

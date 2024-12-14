@@ -12,11 +12,11 @@ import java.util.List;
 @Mapper
 public interface CustomerViewMapper {
 
-    @Select("Select * from airport_flight_info")
+    @Select("Select * from airport_flight_info join  company_routes_info cri on airport_flight_info.routeID = cri.routeID ")
     List<AirportFlight> getFlightList();
 
-    @Select("Select * from company_routes_info where routeID = #{routeID}")
-    CompanyRoutes getCompanyRoutes(String routeID);
+//    @Select("Select * from company_routes_info where routeID = #{routeID}")
+//    CompanyRoutes getCompanyRoutes(String routeID);
 
     @Insert("Insert into customer_ticket_info(dateTime,flightID,status,email) values(#{dateTime},#{flightID},#{status},#{email})")
     void orderFlight(AirportFlight airportFlight);
@@ -30,7 +30,16 @@ public interface CustomerViewMapper {
     @Select("SELECT * FROM customer_info WHERE email = #{email}")
     Customer getCustomerInfo(String email);
 
-    @Select("SELECT * FROM customer_ticket_info WHERE email = #{email}")
+    @Select("SELECT\n" +
+            "    cti.dateTime,cti.status,cti.flightID,cti.email,afi.departureTime,afi.boardingGate,afi.price,afi.seatCount,cri.routeID,cri.origin,cri.destination,cri.originAirport,cri.destinationAirport\n" +
+            "\n" +
+            "FROM\n" +
+            "    customer_ticket_info cti\n" +
+            "        JOIN airport_flight_info afi\n" +
+            "             ON cti.flightID = afi.flightID\n" +
+            "        JOIN company_routes_info cri\n" +
+            "             ON afi.routeID = cri.routeID\n" +
+            "WHERE cti.email = #{email};\n")
     List<CustomerTicketInfo> getBillList(String email);
 
     @Select("SELECT * FROM airport_flight_info WHERE flightID = #{flightID}")
@@ -40,6 +49,7 @@ public interface CustomerViewMapper {
     void billRetreat(String ticketID);
 @Select("SELECT * FROM customer_ticket_info WHERE ticketID = #{ticketID}")
     CustomerTicketInfo getCustomerTicketInfo(String ticketID);
-@Select("SELECT * FROM company_routes_info WHERE routeID = #{routeID}")
-    CompanyRoutes getCompanyRoute(String routeId);
+
+@Update("UPDATE customer_info SET name = #{name}, phone = #{phone}, gender = #{gender}  WHERE email = #{email}")
+    void updateCustomerInfo(Customer customer);
 }

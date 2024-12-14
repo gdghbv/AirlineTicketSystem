@@ -5,7 +5,7 @@
       class="margin-top"
       title="个人信息界面"
       :column="3"
-      :size="default"
+    
       border
     >
       <template #extra>
@@ -74,21 +74,21 @@
     <el-dialog v-model="dialogVisible" :title="title" width="30%">
         <el-form :model="airportData" lable-width="100px" style="padding-right: 30px;">
             <el-form-item label="昵称" prop="airportName">
-                <el-input v-model="updataAirportData.airportName" placeholder="请输入昵称"></el-input>
+                <el-input v-model="updateAirportData.airportName" placeholder="请输入昵称"></el-input>
             </el-form-item>
             <el-form-item label="电话" prop="airportPhone">
-                <el-input v-model="updataAirportData.airportPhone" placeholder="请输入电话"></el-input>
+                <el-input v-model="updateAirportData.airportPhone" placeholder="请输入电话"></el-input>
             </el-form-item>
             <el-form-item label="性别" prop="airportAddress">
-                <el-input v-model="updataAirportData.airportAddress" placeholder="请输入地址"></el-input>
+                <el-input v-model="updateAirportData.airportAddress" placeholder="请输入地址"></el-input>
             </el-form-item>
             <el-form-item label="邮箱" prop="email">
-                <el-input v-model="updataAirportData.email" placeholder="请输入邮箱"></el-input>
+                <el-input v-model="updateAirportData.email" placeholder="请输入邮箱"></el-input>
             </el-form-item>
         </el-form>
         <template #footer>
             <span class="dialog-footer">
-                <el-button type="primary" @click="updataAirportInfo()"> 确 定</el-button>
+                <el-button type="primary" @click="updateAirportInfo()"> 确 定</el-button>
                 <el-button @click="dialogVisible = false"> 取 消</el-button>
             </span>
         </template>
@@ -120,7 +120,7 @@ const airportData = ref({
 }
 );
 
-const updataAirportData = ref([
+const updateAirportData = ref([
     {
         airportName: '',
         airportPhone: '',
@@ -132,24 +132,24 @@ const updataAirportData = ref([
 const showDialog = (row) => {
     dialogVisible.value = true;
     title.value = '编辑信息';
-    updataAirportData.value = airportData.value;
+    updateAirportData.value = airportData.value;
 }
 
 
-// import { airportInfoService, updataAirportInfoService } from '@/service/airport_info_service'
-// const airportInfo = async () => {
-//     let result = await airportInfoService();
-//     clustomerData.value = result.data;
+import { airportInfoService, updateAirportInfoService } from '@/api/airport_view'
+const airportInfo = async () => {
+    let result = await airportInfoService();
+    airportData.value = result.data;
 
-// }
-// airportInfo();
-// import { ElMessage } from 'element-plus'
-// const updataAirportInfo = async () => {
-//     let result = await updataAirportInfoService(clustomerData.value);
-//     ElMessage.success(result.msg ? result.msg : '修改成功');
-//     dialogVisible.value = false;
-//     airportInfo();
-// }
+}
+airportInfo();
+import { ElMessage } from 'element-plus'
+const updateAirportInfo = async () => {
+    let result = await updateAirportInfoService(updateAirportData.value);
+    ElMessage.success(result.msg ? result.msg : '修改成功');
+    dialogVisible.value = false;
+    airportInfo();
+}
 
 
   import { computed, ref } from 'vue'

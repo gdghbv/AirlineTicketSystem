@@ -15,4 +15,8 @@ public interface CustomerViewService {
     List<CustomerTicketInfo> getBillList();
 
     void billRetreat(String ticketID);
+
+    Customer customerInfo();
+
+    void updateCustomerInfo(Customer customer);
 }

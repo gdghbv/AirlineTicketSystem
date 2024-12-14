@@ -5,7 +5,7 @@
       class="margin-top"
       title="公司信息界面"
       :column="3"
-      :size="default"
+ 
       border
     >
       <template #extra>
@@ -74,21 +74,21 @@
     <el-dialog v-model="dialogVisible" :title="title" width="30%">
         <el-form :model="companyData" lable-width="100px" style="padding-right: 30px;">
             <el-form-item label="公司名称" prop="companyName">
-                <el-input v-model="updataCompanyData.companyName" placeholder="请输入公司名称"></el-input>
+                <el-input v-model="updateCompanyData.companyName" placeholder="请输入公司名称"></el-input>
             </el-form-item>
             <el-form-item label="电话" prop="phone">
-                <el-input v-model="updataCompanyData.phone" placeholder="请输入电话"></el-input>
+                <el-input v-model="updateCompanyData.phone" placeholder="请输入电话"></el-input>
             </el-form-item>
             <el-form-item label="地址" prop="companyAddress">
-                <el-input v-model="updataCompanyData.companyAddress" placeholder="请输入地址"></el-input>
+                <el-input v-model="updateCompanyData.companyAddress" placeholder="请输入地址"></el-input>
             </el-form-item>
             <el-form-item label="邮箱" prop="email">
-                <el-input v-model="updataCompanyData.email" placeholder="请输入邮箱"></el-input>
+                <el-input v-model="updateCompanyData.email" placeholder="请输入邮箱"></el-input>
             </el-form-item>
         </el-form>
         <template #footer>
             <span class="dialog-footer">
-                <el-button type="primary" @click="updataCompany()"> 确 定</el-button>
+                <el-button type="primary" @click="updateCompany()"> 确 定</el-button>
                 <el-button @click="dialogVisible = false"> 取 消</el-button>
             </span>
         </template>
@@ -102,7 +102,7 @@
 const showDialog = (row) => {
     dialogVisible.value = true;
     title.value = '编辑信息';
-    updataCompanyData.value = companyData.value;
+    updateCompanyData.value = companyData.value;
 }
 
 
@@ -122,7 +122,7 @@ const companyData = ref({
 }
 );
 
-const updataCompanyData = ref([
+const updateCompanyData = ref([
     {
         companyName: '',
         phone: '',
@@ -131,20 +131,20 @@ const updataCompanyData = ref([
     }
 ])
 
-// import { companyInfoService, updataCompanyInfoService } from '@/api/company_view.js'
-// const companyInfo = async () => {
-//     let result = await companyInfoService();
-//     clustomerData.value = result.data;
+import { companyInfoService, updateCompanyInfoService } from '@/api/company_view.js'
+const companyInfo = async () => {
+    let result = await companyInfoService();
+   companyData.value = result.data;
 
-// }
-// companyInfo();
-// import { ElMessage } from 'element-plus'
-// const updataCompany = async () => {
-//     let result = await updataCompanyInfoService(clustomerData.value);
-//     ElMessage.success(result.msg ? result.msg : '修改成功');
-//     dialogVisible.value = false;
-//     companyInfo();
-// }
+}
+companyInfo();
+import { ElMessage } from 'element-plus'
+const updateCompany = async () => {
+    let result = await updateCompanyInfoService(updateCompanyData.value);
+    ElMessage.success(result.msg ? result.msg : '修改成功');
+    dialogVisible.value = false;
+    companyInfo();
+}
 
 
   import { computed, ref } from 'vue'

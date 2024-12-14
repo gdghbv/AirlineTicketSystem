@@ -49,19 +49,5 @@ public class CompanyController {
        }
        return Result.error("密码错误");
    }
-    @GetMapping("/companyInfo")
-    public Result<Company> companyInfo(){
-//        Map<String, Object> map = JwtUtil.parseToken(token);
-//        String email = (String) map.get("email");
-        Map<String, Object> map = ThreadLocalUtil.get();
-        String email = (String) map.get("email");
-        Company company = companyService.findCompanyByEmail(email);
-        return Result.success(company);
-    }
-    @PutMapping("/updateCompanyInfo")
-    public Result update(@RequestBody Company company){
 
-       companyService.update(company);
-       return Result.success();
-    }
 }

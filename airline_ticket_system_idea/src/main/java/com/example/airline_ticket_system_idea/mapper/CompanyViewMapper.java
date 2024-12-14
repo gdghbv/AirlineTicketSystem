@@ -1,5 +1,6 @@
 package com.example.airline_ticket_system_idea.mapper;
 
+import com.example.airline_ticket_system_idea.pojo.Company;
 import com.example.airline_ticket_system_idea.pojo.CompanyAircraft;
 import com.example.airline_ticket_system_idea.pojo.CompanyRoutes;
 import org.apache.ibatis.annotations.*;
@@ -38,5 +39,11 @@ public interface CompanyViewMapper {
 
     @Update("UPDATE company_routes_info SET aircraftID = #{aircraftID}, routeID=#{routeID},origin=#{origin},destination=#{destination},originAirport=#{originAirport},destinationAirport=#{destinationAirport} WHERE routeID = #{routeID}")
     void updateRoutes(CompanyRoutes companyRoutes);
+
+    @Select("SELECT * FROM company_info WHERE email = #{email}")
+    Company findCompanyByEmail(String email);
+
+    @Update("UPDATE company_info SET companyID = #{companyID}, companyName= #{companyName},companyAddress = #{companyAddress}, phone = #{phone} WHERE email = #{email}")
+    void update(Company company);
 }
 

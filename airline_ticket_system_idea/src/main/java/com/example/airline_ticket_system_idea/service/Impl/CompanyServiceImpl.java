@@ -23,8 +23,5 @@ public class CompanyServiceImpl implements CompanyService {
           companyMapper.add(companyID,email,md5String);
     }
 
-    @Override
-    public void update(Company company) {
-        companyMapper.update(company);
-    }
+
 }

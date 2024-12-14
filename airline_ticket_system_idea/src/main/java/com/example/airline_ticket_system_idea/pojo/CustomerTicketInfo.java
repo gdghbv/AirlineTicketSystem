@@ -11,7 +11,7 @@ private LocalDateTime dateTime;
 private String status;
 private String flightID;
 private String email;
-
+private String seatID;
     //  这是航班相关信息
     private String routeID;
     private String aircraftID;

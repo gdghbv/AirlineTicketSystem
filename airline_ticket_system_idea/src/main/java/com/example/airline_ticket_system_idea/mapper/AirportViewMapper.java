@@ -9,7 +9,7 @@ import java.util.List;
 public interface AirportViewMapper {
 
     //机场航班
-    @Select("SELECT * FROM airport_flight_info " +
+    @Select("SELECT * FROM airport_flight_info afi Join company_routes_info cri on afi.routeID = cri.routeID " +
             "WHERE airportID= #{airportID}")
     List<AirportFlight> getFlightList(String airportID);
 
@@ -62,7 +62,11 @@ public interface AirportViewMapper {
 @Select("SELECT seatCount FROM company_aircraft_info WHERE aircraftID= #{aircraftID}")
     CompanyAircraft getCompanyAircraft(String aircraftID);
 
+@Select("SELECT * FROM airport_info WHERE email=#{email}")
+    Airport findAirportByEmail(String email);
 
+@Update("UPDATE airport_info SET  airportAddress=#{airportAddress},airportPhone=#{airportPhone} ,airportID=#{airportID}   WHERE email=#{email}")
+    void updateAirport(Airport airport);
 }
 
 

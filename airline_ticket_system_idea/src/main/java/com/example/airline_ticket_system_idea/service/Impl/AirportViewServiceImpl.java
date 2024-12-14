@@ -24,20 +24,7 @@ public class AirportViewServiceImpl implements AirportViewService {
         String airportID = (String) map.get("airportID");
         List<AirportFlight> flightList = airportViewMapper.getFlightList(airportID);
 
-        for (AirportFlight flight : flightList) {
-            String routeId = flight.getRouteID();
-            //
-            CompanyRoutes companyRoute = airportViewMapper.getCompanyRoute(routeId);
-            if (companyRoute != null) {
-                //编辑返回的数据，添加详细的航线消息
-                flight.setOrigin(companyRoute.getOrigin());
-                flight.setDestination(companyRoute.getDestination());
-                flight.setOriginAirport(companyRoute.getOriginAirport());
-                flight.setDestinationAirport(companyRoute.getDestinationAirport());
-                flight.setCompanyID(companyRoute.getCompanyID());
-                flight.setAircraftID(companyRoute.getAircraftID());
-            }
-        }
+
         return flightList;
     }
 
@@ -111,6 +98,16 @@ public class AirportViewServiceImpl implements AirportViewService {
     public void updateCustomer(Customer customer) {
         airportViewMapper.updateCustomer(customer);
 
+    }
+
+    @Override
+    public Airport findAirportByEmail(String email) {
+        return airportViewMapper.findAirportByEmail(email);
+    }
+
+    @Override
+    public void update(Airport airport) {
+airportViewMapper.updateAirport(airport);
     }
 
 

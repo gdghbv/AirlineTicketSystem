@@ -1,6 +1,7 @@
 package com.example.airline_ticket_system_idea.controller;
 
 import com.example.airline_ticket_system_idea.pojo.AirportFlight;
+import com.example.airline_ticket_system_idea.pojo.Customer;
 import com.example.airline_ticket_system_idea.pojo.CustomerTicketInfo;
 import com.example.airline_ticket_system_idea.pojo.Result;
 import com.example.airline_ticket_system_idea.service.CustomerViewService;
@@ -35,6 +36,16 @@ public class CustomerViewController {
     public Result<String> billRetreat( @PathVariable String ticketID){
         customerViewService.billRetreat(ticketID);
         return Result.success("退票成功");
+    }
+    @GetMapping("/customerInfo")
+    public Result<Customer> customerInfo(){
+        Customer customer = customerViewService.customerInfo();
+        return Result.success(customer);
+    }
+    @PutMapping("/updateCustomerInfo")
+    public Result<String> updateCustomerInfo(@RequestBody Customer customer){
+        customerViewService.updateCustomerInfo(customer);
+        return Result.success("修改成功");
     }
 
 }
